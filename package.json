@@ -1,0 +1,25 @@
+{
+  "name": "appscript-sheetman",
+  "version": "1.0.0",
+  "description": "Easy to use Google Apps Script Spreadsheet API (using Method chaining)",
+  "main": "SheetMan.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jooy2/gas-sheetman.git"
+  },
+  "author": "jooy2 <jootc.help@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jooy2/gas-sheetman/issues"
+  },
+  "homepage": "https://github.com/jooy2/gas-sheetman#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2"
+  }
+}
