@@ -1,39 +1,40 @@
-let originSheet = SpreadsheetApp.getActiveSpreadsheet();
-let activeSheet = originSheet;
-
 class SheetMan {
+  constructor() {
+    this.Utils = new Utils();
+    this.SheetApp = SpreadsheetApp;
+    this.Sheets = Sheets;
+    this.activeSheet = this.SheetApp.getActiveSpreadsheet();
+    this.originSheet = this.activeSheet;
+    this.sheet = null;
+  }
+
   createFile(title, nameForFirstSheet) {
-    this.sheet = SpreadsheetApp.create(title);
+    this.sheet = this.SheetApp.create(title);
+
     if (arguments.length === 2) {
       this.sheet.getActiveSheet().setName(nameForFirstSheet);
     }
 
-    this.sheet.createdSheetId = this.getFileIdByUrl(this.sheet.getUrl());
+    this.sheet.createdSheetId = this.Utils.getFileIdByUrl(this.sheet.getUrl());
 
     return this;
   }
 
   createFileUsingApi(title) {
-    const sheet = Sheets.newSpreadsheet();
-    sheet.properties = Sheets.newSpreadsheetProperties();
+    const sheet = this.Sheets.newSpreadsheet();
+    sheet.properties = this.Sheets.newSpreadsheetProperties();
     sheet.properties.title = title;
 
-    const newFile = Sheets.Spreadsheets.create(sheet);
+    const newFile = this.Sheets.SpreadSheets.create(sheet);
     this.sheet.createdSheetId = newFile.spreadsheetId;
 
     return this;
   }
 
   getFileId() {
-    return this.sheet.createdSheetId ?
-             this.sheet.createdSheetId
-             :
-             SpreadsheetApp.getActiveSpreadsheet().getId();
-  }
-
-  getFileIdByUrl(url) {
-    // https://docs.google.com/spreadsheets/d/{SheetId}/edit#gid={gid}
-    return url.split("/")[5];
+    return this.sheet.createdSheetId
+      ? this.sheet.createdSheetId
+      : this.SheetApp.getActiveSpreadsheet().getId();
   }
 
   getSheetId() {
@@ -47,30 +48,29 @@ class SheetMan {
   targetTo(sheetId) {
     if (sheetId === 'self') {
       this.isExternalSheet = false;
-      this.sheet = originSheet;
+      this.sheet = this.originSheet;
     } else {
       this.isExternalSheet = true;
-      this.sheet = SpreadsheetApp.openById(sheetId);
+      this.sheet = this.SheetApp.openById(sheetId);
     }
 
-    activeSheet = this.sheet;
+    this.activeSheet = this.sheet;
 
     return this;
   }
 
   targetSelf() {
     this.isExternalSheet = false;
-    this.sheet = originSheet;
+    this.sheet = this.originSheet;
 
-    activeSheet = this.sheet;
+    this.activeSheet = this.sheet;
 
     return this;
   }
 
   active(sheetName) {
-    this.sheet = activeSheet.getSheetByName(sheetName);
-    if (this.sheet)
-      this.sheet.name = sheetName;
+    this.sheet = this.activeSheet.getSheetByName(sheetName);
+    if (this.sheet) this.sheet.name = sheetName;
 
     if (sheetName.length < 1 || !this.sheet) {
       throw `'${sheetName}' 시트가 존재하지 않습니다. 생성하려면 create()를 사용합니다.`;
@@ -80,30 +80,28 @@ class SheetMan {
   }
 
   isExist(sheetName) {
-    return this.isExternalSheet ?
-                    this.sheet ? this.sheet.getSheetByName(sheetName) : null
-                    :
-                    activeSheet.getSheetByName(sheetName);
+    if (this.isExternalSheet) {
+      return this.sheet ? this.sheet.getSheetByName(sheetName) : null;
+    }
+    return this.activeSheet.getSheetByName(sheetName);
   }
 
   create(sheetName) {
     try {
-      this.sheet = activeSheet.getSheetByName(sheetName);
+      this.sheet = this.activeSheet.getSheetByName(sheetName);
 
       if (!this.sheet) {
-        this.sheet = activeSheet.insertSheet(sheetName).activate();
-        //this.sheet = this.active(sheetName);
+        this.sheet = this.activeSheet.insertSheet(sheetName).activate();
       }
     } catch (e) {
       throw `'${sheetName}' 시트 생성에 실패했습니다. 이미 존재하거나 알 수 없는 에러입니다.`;
-    } finally {
-      return this;
     }
+    return this;
   }
 
   rename(renameTo) {
     if (!renameTo || renameTo.length < 1) {
-      throw `'${sheetName}' 시트를 '${renameTo}'로 변경할 수 없습니다.`
+      throw `'${sheetName}' 시트를 '${renameTo}'로 변경할 수 없습니다.`;
     }
 
     this.sheet.setName(renameTo);
@@ -113,7 +111,7 @@ class SheetMan {
 
   destroy() {
     try {
-      SpreadsheetApp.getActive().deleteSheet(this.sheet);
+      this.SheetApp.getActive().deleteSheet(this.sheet);
     } catch (e) {
       throw `'${this.sheet.name}' 시트 삭제에 실패했습니다.`;
     }
@@ -126,27 +124,27 @@ class SheetMan {
   }
 
   flush() {
-    SpreadsheetApp.flush();
+    this.SheetApp.flush();
 
     return this;
   }
 
   getId() {
-    return SpreadsheetApp.getActiveSpreadsheet().getId();
+    return this.SheetApp.getActiveSpreadsheet().getId();
   }
 
   getSheetCount() {
-    return activeSheet.getSheets().length;
+    return this.activeSheet.getSheets().length;
   }
 
   getRange(startRow, startColumn, rows, columns) {
-    this.sheet.activeRange = arguments.length === 1 ?
-      this.sheet.getRange(startRow)
-      :
-      this.sheet.activeRange = arguments.length === 2 ?
-        this.sheet.getRange(startRow, startColumn)
-        :
-        this.sheet.getRange(startRow, startColumn, rows, columns);
+    if (arguments.length === 1) {
+      this.sheet.activeRange = this.sheet.getRange(startRow);
+    } else if (arguments.length === 2) {
+      this.sheet.activeRange = this.sheet.getRange(startRow, startColumn);
+    } else {
+      this.sheet.activeRange = this.sheet.getRange(startRow, startColumn, rows, columns);
+    }
 
     return this;
   }
@@ -292,12 +290,12 @@ class SheetMan {
   }
 
   expand(columnCount, rowCount) {
-    if (columnCount > 0)
+    if (columnCount > 0) {
       this.addColumns(columnCount);
-
-    if (rowCount > 0)
+    }
+    if (rowCount > 0) {
       this.addRows(rowCount);
-
+    }
     return this;
   }
 
@@ -313,26 +311,27 @@ class SheetMan {
   }
 
   copyToOnlyData(startRow, startColumn) {
-    this.sheet.activeRange.copyTo(this.sheet.getRange(startRow, startColumn), {contentsOnly:true});
+    this.sheet.activeRange
+      .copyTo(this.sheet.getRange(startRow, startColumn), { contentsOnly: true });
 
     return this;
   }
 
-  copyToExt(originSheet, targetSheet, startRow, startColumn) {
+  copyToExt(originalSheet, targetSheet, startRow, startColumn) {
     this.active(targetSheet).getRange(startRow, startColumn);
     this.sheet.activeRange.copyTo(this.sheet.activeRange);
-    return this.active(originSheet);
+    return this.active(originalSheet);
   }
 
   addRows(count) {
     if (count < 1) {
-      throw `추가할 행의 수가 잘못되었습니다.`;
+      throw '추가할 행의 수가 잘못되었습니다.';
     }
 
     try {
       this.sheet.insertRowsAfter(this.sheet.getMaxRows(), count);
     } catch (e) {
-      throw `행 추가 도중 문제가 발생했습니다.`;
+      throw '행 추가 도중 문제가 발생했습니다.';
     }
 
     return this;
@@ -340,13 +339,13 @@ class SheetMan {
 
   addColumns(count) {
     if (count < 1) {
-      throw `추가할 열의 수가 잘못되었습니다.`;
+      throw '추가할 열의 수가 잘못되었습니다.';
     }
 
     try {
       this.sheet.insertColumnsAfter(this.sheet.getMaxColumns(), count);
     } catch (e) {
-      throw `열 추가 도중 문제가 발생했습니다.`;
+      throw '열 추가 도중 문제가 발생했습니다.';
     }
 
     return this;
@@ -365,21 +364,24 @@ class SheetMan {
   }
 
   insertLastColumn(data, forceOneLength = false) {
-    if (typeof data === "object") {
+    if (typeof data === 'object') {
       try {
         const dataLength = data.length;
         if (dataLength < 1) {
-          throw `추가하려는 데이터가 없습니다.`;
+          throw '추가하려는 데이터가 없습니다.';
         }
-        this.addColumns(forceOneLength ? 1 : dataLength).sheet.getRange(1, this.sheet.getLastColumn()+1, dataLength, 1).setValues(data);
+        this.addColumns(forceOneLength ? 1 : dataLength)
+          .sheet
+          .getRange(1, this.sheet.getLastColumn() + 1, dataLength, 1)
+          .setValues(data);
       } catch (e) {
-        throw `추가하려는 셀 데이터가 실제 시트의 행 개수 보다 많습니다.`;
+        throw '추가하려는 셀 데이터가 실제 시트의 행 개수 보다 많습니다.';
       }
-    } else if (typeof data === "string") {
+    } else if (typeof data === 'string') {
       try {
-        this.sheet.getRange(1, this.sheet.getLastColumn()+1).setValue(data);
+        this.sheet.getRange(1, this.sheet.getLastColumn() + 1).setValue(data);
       } catch (e) {
-        throw `셀 데이터 입력 도중 문제가 발생했습니다.`;
+        throw '셀 데이터 입력 도중 문제가 발생했습니다.';
       }
     }
 
@@ -387,15 +389,17 @@ class SheetMan {
   }
 
   insertLastRow(data) {
-    if (typeof data === "object") {
-      let dataLength = data.length;
-      if (dataLength < 1) return;
+    if (typeof data === 'object') {
+      const dataLength = data.length;
+      if (dataLength < 1) {
+        return this;
+      }
 
-      this.getRange(this.sheet.getLastRow()+1, 1, dataLength, data[0].length).setValues(data);
-    } else if (typeof data === "string") {
-      this.getRange(this.sheet.getLastRow()+1, 1).setValue(data);
+      this.getRange(this.sheet.getLastRow() + 1, 1, dataLength, data[0].length).setValues(data);
+    } else if (typeof data === 'string') {
+      this.getRange(this.sheet.getLastRow() + 1, 1).setValue(data);
     } else {
-      throw `올바른 데이터 형식이 아닙니다.`;
+      throw '올바른 데이터 형식이 아닙니다.';
     }
 
     return this;
@@ -441,10 +445,10 @@ class SheetMan {
 
     if (isRow) {
       // 헤더 행을 포함
-      let frozenRows = this.getFrozenRows();
+      const frozenRows = this.getFrozenRows();
 
       if (frozenRows > 0) {
-        last = last + frozenRows;
+        last += frozenRows;
       }
     }
 
@@ -455,10 +459,11 @@ class SheetMan {
     }
 
     if (last !== max && avail > 1 && last > 0) {
-      isRow ?
-        this.sheet.deleteRows(last+1, last === 1 ? avail-1 : avail)
-        :
-        this.sheet.deleteColumns(last+1, last === 1 ? avail-1 : avail);
+      if (isRow) {
+        this.sheet.deleteRows(last + 1, last === 1 ? avail - 1 : avail);
+      } else {
+        this.sheet.deleteColumns(last + 1, last === 1 ? avail - 1 : avail);
+      }
     }
 
     return this;
@@ -484,7 +489,7 @@ class SheetMan {
   }
 
   resizeColumns() {
-    for (let i=1, columnLength=this.sheet.getMaxColumns(); i<=columnLength; i++) {
+    for (let i = 1, columnLength = this.sheet.getMaxColumns(); i <= columnLength; i += 1) {
       this.sheet.autoResizeColumn(i);
       this.sheet.setColumnWidth(i, this.sheet.getColumnWidth(i) + 30);
     }
@@ -494,14 +499,16 @@ class SheetMan {
 
   convertColumnToString(position) {
     const columnCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
-                              'H', 'I', 'J', 'K', 'L', 'M', 'N',
-                              'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-                              'V', 'W', 'X', 'Y', 'Z'];
+      'H', 'I', 'J', 'K', 'L', 'M', 'N',
+      'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+      'V', 'W', 'X', 'Y', 'Z'];
 
-    for (let i=1, columnLength = columnCharacters.length; i<columnLength; i++) {
+    for (let i = 1, columnLength = columnCharacters.length; i < columnLength; i += 1) {
       if (position === i) {
-        return columnCharacters[i-1];
+        return columnCharacters[i - 1];
       }
     }
+
+    return this;
   }
 }
