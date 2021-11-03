@@ -6,4 +6,4 @@ Easy to use Google Apps Script Spreadsheet API (using Method chaining)
  - Add how to use in README.md
 
 ## License
-Copyright ¨Ï 2021 Jooy2 Released under the MIT license
+Copyright Â© 2021 Jooy2 Released under the MIT license
