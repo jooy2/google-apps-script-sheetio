@@ -1,5 +1,5 @@
 class SheetMan {
-  constructor() {
+  constructor () {
     this.Utils = new Utils();
     this.SheetApp = SpreadsheetApp;
     this.Sheets = Sheets;
@@ -8,7 +8,7 @@ class SheetMan {
     this.sheet = null;
   }
 
-  createFile(title, nameForFirstSheet) {
+  createFile (title, nameForFirstSheet) {
     this.sheet = this.SheetApp.create(title);
 
     if (arguments.length === 2) {
@@ -20,7 +20,7 @@ class SheetMan {
     return this;
   }
 
-  createFileUsingApi(title) {
+  createFileUsingApi (title) {
     const sheet = this.Sheets.newSpreadsheet();
     sheet.properties = this.Sheets.newSpreadsheetProperties();
     sheet.properties.title = title;
@@ -31,21 +31,21 @@ class SheetMan {
     return this;
   }
 
-  getFileId() {
+  getFileId () {
     return this.sheet.createdSheetId
       ? this.sheet.createdSheetId
       : this.SheetApp.getActiveSpreadsheet().getId();
   }
 
-  getSheetId() {
+  getSheetId () {
     return this.sheet.getSheetId();
   }
 
-  getSheetName() {
+  getSheetName () {
     return this.sheet.getName();
   }
 
-  targetTo(sheetId) {
+  targetTo (sheetId) {
     if (sheetId === 'self') {
       this.isExternalSheet = false;
       this.sheet = this.originSheet;
@@ -59,7 +59,7 @@ class SheetMan {
     return this;
   }
 
-  targetSelf() {
+  targetSelf () {
     this.isExternalSheet = false;
     this.sheet = this.originSheet;
 
@@ -68,7 +68,7 @@ class SheetMan {
     return this;
   }
 
-  active(sheetName) {
+  active (sheetName) {
     this.sheet = this.activeSheet.getSheetByName(sheetName);
     if (this.sheet) this.sheet.name = sheetName;
 
@@ -79,14 +79,14 @@ class SheetMan {
     return this;
   }
 
-  isExist(sheetName) {
+  isExist (sheetName) {
     if (this.isExternalSheet) {
       return this.sheet ? this.sheet.getSheetByName(sheetName) : null;
     }
     return this.activeSheet.getSheetByName(sheetName);
   }
 
-  create(sheetName) {
+  create (sheetName) {
     try {
       this.sheet = this.activeSheet.getSheetByName(sheetName);
 
@@ -99,7 +99,7 @@ class SheetMan {
     return this;
   }
 
-  rename(renameTo) {
+  rename (renameTo) {
     if (!renameTo || renameTo.length < 1) {
       throw `'${sheetName}' 시트를 '${renameTo}'로 변경할 수 없습니다.`;
     }
@@ -109,7 +109,7 @@ class SheetMan {
     return this;
   }
 
-  destroy() {
+  destroy () {
     try {
       this.SheetApp.getActive().deleteSheet(this.sheet);
     } catch (e) {
@@ -119,25 +119,25 @@ class SheetMan {
     return this;
   }
 
-  destroyByName(sheetName) {
+  destroyByName (sheetName) {
     return this.active(sheetName).destroy();
   }
 
-  flush() {
+  flush () {
     this.SheetApp.flush();
 
     return this;
   }
 
-  getId() {
+  getId () {
     return this.SheetApp.getActiveSpreadsheet().getId();
   }
 
-  getSheetCount() {
+  getSheetCount () {
     return this.activeSheet.getSheets().length;
   }
 
-  getRange(startRow, startColumn, rows, columns) {
+  getRange (startRow, startColumn, rows, columns) {
     if (arguments.length === 1) {
       this.sheet.activeRange = this.sheet.getRange(startRow);
     } else if (arguments.length === 2) {
@@ -149,114 +149,114 @@ class SheetMan {
     return this;
   }
 
-  getDataRange() {
+  getDataRange () {
     this.sheet.activeRange = this.sheet.getDataRange();
 
     return this;
   }
 
-  getLastRow() {
+  getLastRow () {
     const lastRow = this.sheet.getLastRow();
 
     return lastRow === 0 ? 1 : lastRow;
   }
 
-  getLastColumn() {
+  getLastColumn () {
     const lastColumn = this.sheet.getLastColumn();
 
     return lastColumn === 0 ? 1 : lastColumn;
   }
 
-  getMaxRows() {
+  getMaxRows () {
     return this.sheet.getMaxRows();
   }
 
-  getMaxColumns() {
+  getMaxColumns () {
     return this.sheet.getMaxColumns();
   }
 
-  getFrozenRows() {
+  getFrozenRows () {
     return this.sheet.getFrozenRows();
   }
 
-  getFrozenColumns() {
+  getFrozenColumns () {
     return this.sheet.getFrozenColumns();
   }
 
-  getValue() {
+  getValue () {
     return this.sheet.activeRange.getValue();
   }
 
-  getValues() {
+  getValues () {
     return this.sheet.activeRange.getValues();
   }
 
-  setValue(data) {
+  setValue (data) {
     this.sheet.activeRange.setValue(data);
 
     return this;
   }
 
-  setValues(data) {
+  setValues (data) {
     this.sheet.activeRange.setValues(data);
 
     return this;
   }
 
-  setFormat(format) {
+  setFormat (format) {
     // https://developers.google.com/sheets/api/guides/formats
     this.sheet.activeRange.setNumberFormat(format);
 
     return this;
   }
 
-  sort(column) {
+  sort (column) {
     this.sheet.sort(column);
 
     return this;
   }
 
-  sortMultiple(config) {
+  sortMultiple (config) {
     this.sheet.activeRange.sort(config);
 
     return this;
   }
 
-  setAlignHorizontal(align) {
+  setAlignHorizontal (align) {
     this.sheet.activeRange.setHorizontalAlignment(align);
 
     return this;
   }
 
-  setAlignVertical(align) {
+  setAlignVertical (align) {
     this.sheet.activeRange.setVerticalAlignment(align);
 
     return this;
   }
 
-  setWidth(column, width) {
+  setWidth (column, width) {
     this.sheet.setColumnWidth(column, width);
 
     return this;
   }
 
-  setWrap(wrap) {
+  setWrap (wrap) {
     this.sheet.activeRange.setWrap(wrap);
   }
 
-  setRowHeight(row, height) {
+  setRowHeight (row, height) {
     this.sheet.setRowHeight(row, height);
   }
 
-  setRowHeights(row, lastRow, height) {
+  setRowHeights (row, lastRow, height) {
     this.sheet.setRowHeights(row, lastRow, height);
   }
 
-  setBorder(border) {
+  setBorder (border) {
     this.sheet.activeRange.setBorder(border);
   }
 
-  setHeader(config) {
+  setHeader (config) {
     const range = this.sheet.getRange('A1:1');
 
     config.freeze && this.sheet.setFrozenRows(1);
@@ -264,32 +264,32 @@ class SheetMan {
     config.color && range.setFontColor(config.color);
   }
 
-  setBackground(color) {
+  setBackground (color) {
     this.sheet.activeRange.setBackground(color);
   }
 
-  setColor(color) {
+  setColor (color) {
     this.sheet.activeRange.setFontColor(color);
   }
 
-  setWeight(weight) {
+  setWeight (weight) {
     this.sheet.activeRange.setFontWeight(weight);
   }
 
-  setSize(size) {
+  setSize (size) {
     this.sheet.activeRange.setFontSize(size);
   }
 
-  setFamily(family) {
+  setFamily (family) {
     this.sheet.activeRange.setFontFamily(family);
   }
 
-  setStyle(data) {
+  setStyle (data) {
     data.background && this.setBackground(data.background);
     data.color && this.setColor(data.color);
   }
 
-  expand(columnCount, rowCount) {
+  expand (columnCount, rowCount) {
     if (columnCount > 0) {
       this.addColumns(columnCount);
     }
@@ -299,31 +299,31 @@ class SheetMan {
     return this;
   }
 
-  clearFormat() {
+  clearFormat () {
     this.sheet.clearFormats();
     return this;
   }
 
-  copyTo(startRow, startColumn) {
+  copyTo (startRow, startColumn) {
     this.sheet.activeRange.copyTo(this.sheet.getRange(startRow, startColumn));
 
     return this;
   }
 
-  copyToOnlyData(startRow, startColumn) {
+  copyToOnlyData (startRow, startColumn) {
     this.sheet.activeRange
       .copyTo(this.sheet.getRange(startRow, startColumn), { contentsOnly: true });
 
     return this;
   }
 
-  copyToExt(originalSheet, targetSheet, startRow, startColumn) {
+  copyToExt (originalSheet, targetSheet, startRow, startColumn) {
     this.active(targetSheet).getRange(startRow, startColumn);
     this.sheet.activeRange.copyTo(this.sheet.activeRange);
     return this.active(originalSheet);
   }
 
-  addRows(count) {
+  addRows (count) {
     if (count < 1) {
       throw '추가할 행의 수가 잘못되었습니다.';
     }
@@ -337,7 +337,7 @@ class SheetMan {
     return this;
   }
 
-  addColumns(count) {
+  addColumns (count) {
     if (count < 1) {
       throw '추가할 열의 수가 잘못되었습니다.';
     }
@@ -351,19 +351,19 @@ class SheetMan {
     return this;
   }
 
-  insertColumnAfter(index) {
+  insertColumnAfter (index) {
     this.sheet.insertColumnAfter(index);
 
     return this;
   }
 
-  insertRowAfter(index) {
+  insertRowAfter (index) {
     this.sheet.insertRowAfter(index);
 
     return this;
   }
 
-  insertLastColumn(data, forceOneLength = false) {
+  insertLastColumn (data, forceOneLength = false) {
     if (typeof data === 'object') {
       try {
         const dataLength = data.length;
@@ -388,7 +388,7 @@ class SheetMan {
     return this;
   }
 
-  insertLastRow(data) {
+  insertLastRow (data) {
     if (typeof data === 'object') {
       const dataLength = data.length;
       if (dataLength < 1) {
@@ -405,37 +405,37 @@ class SheetMan {
     return this;
   }
 
-  merge() {
+  merge () {
     this.sheet.activeRange.merge();
 
     return this;
   }
 
-  mergeAcross() {
+  mergeAcross () {
     this.sheet.activeRange.mergeAcross();
 
     return this;
   }
 
-  clearAll() {
+  clearAll () {
     this.sheet.clearContents();
 
     return this;
   }
 
-  deleteColumn(index) {
+  deleteColumn (index) {
     this.sheet.deleteColumn(index);
 
     return this;
   }
 
-  deleteRow(index) {
+  deleteRow (index) {
     this.sheet.deleteRow(index + 1);
 
     return this;
   }
 
-  minify(isRow) {
+  minify (isRow) {
     if (!this.sheet) {
       return this;
     }
@@ -469,26 +469,26 @@ class SheetMan {
     return this;
   }
 
-  minifyRows() {
+  minifyRows () {
     this.minify(true);
 
     return this;
   }
 
-  minifyColumns() {
+  minifyColumns () {
     this.minify(false);
 
     return this;
   }
 
-  minifyAll() {
+  minifyAll () {
     this.minifyRows();
     this.minifyColumns();
 
     return this;
   }
 
-  resizeColumns() {
+  resizeColumns () {
     for (let i = 1, columnLength = this.sheet.getMaxColumns(); i <= columnLength; i += 1) {
       this.sheet.autoResizeColumn(i);
       this.sheet.setColumnWidth(i, this.sheet.getColumnWidth(i) + 30);
@@ -497,7 +497,7 @@ class SheetMan {
     return this;
   }
 
-  convertColumnToString(position) {
+  convertColumnToString (position) {
     const columnCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
       'H', 'I', 'J', 'K', 'L', 'M', 'N',
       'O', 'P', 'Q', 'R', 'S', 'T', 'U',

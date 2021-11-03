@@ -15,5 +15,6 @@ module.exports = {
     'no-throw-literal': 0,
     'no-unused-expressions': 1,
     'no-unused-vars': 1,
+    'space-before-function-paren': ['error', 'always'],
   },
 };
