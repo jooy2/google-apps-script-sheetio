@@ -120,7 +120,10 @@ class SheetMan {
   }
 
   destroyByName (sheetName) {
-    return this.active(sheetName).destroy();
+    if (sheetName && this.isExist(sheetName)) {
+      return this.active(sheetName).destroy();
+    }
+    return this;
   }
 
   flush () {
