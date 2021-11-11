@@ -73,7 +73,7 @@ class SheetMan {
     if (this.sheet) this.sheet.name = sheetName;
 
     if (sheetName.length < 1 || !this.sheet) {
-      throw `'${sheetName}' 시트가 존재하지 않습니다. 생성하려면 create()를 사용합니다.`;
+      throw `'${sheetName}' The sheet does not exist. To create it, use create().`;
     }
 
     return this;
@@ -94,14 +94,14 @@ class SheetMan {
         this.sheet = this.activeSheet.insertSheet(sheetName).activate();
       }
     } catch (e) {
-      throw `'${sheetName}' 시트 생성에 실패했습니다. 이미 존재하거나 알 수 없는 에러입니다.`;
+      throw `'${sheetName}' Failed to create sheet. Either it already exists or the error is unknown.`;
     }
     return this;
   }
 
   rename (renameTo) {
     if (!renameTo || renameTo.length < 1) {
-      throw `'${sheetName}' 시트를 '${renameTo}'로 변경할 수 없습니다.`;
+      throw `Could not change sheet '${this.sheet.name}' to '${renameTo}'.`;
     }
 
     this.sheet.setName(renameTo);
@@ -113,7 +113,7 @@ class SheetMan {
     try {
       this.SheetApp.getActive().deleteSheet(this.sheet);
     } catch (e) {
-      throw `'${this.sheet.name}' 시트 삭제에 실패했습니다.`;
+      throw `Failed to delete sheet '${this.sheet.name}'.`;
     }
 
     return this;
@@ -328,13 +328,13 @@ class SheetMan {
 
   addRows (count) {
     if (count < 1) {
-      throw '추가할 행의 수가 잘못되었습니다.';
+      throw 'Invalid number of rows to add.';
     }
 
     try {
       this.sheet.insertRowsAfter(this.sheet.getMaxRows(), count);
     } catch (e) {
-      throw '행 추가 도중 문제가 발생했습니다.';
+      throw 'A problem occurred while adding rows.';
     }
 
     return this;
@@ -342,13 +342,13 @@ class SheetMan {
 
   addColumns (count) {
     if (count < 1) {
-      throw '추가할 열의 수가 잘못되었습니다.';
+      throw 'Invalid number of columns to add.';
     }
 
     try {
       this.sheet.insertColumnsAfter(this.sheet.getMaxColumns(), count);
     } catch (e) {
-      throw '열 추가 도중 문제가 발생했습니다.';
+      throw 'A problem occurred while adding columns.';
     }
 
     return this;
@@ -371,20 +371,20 @@ class SheetMan {
       try {
         const dataLength = data.length;
         if (dataLength < 1) {
-          throw '추가하려는 데이터가 없습니다.';
+          throw 'There is no data to add.';
         }
         this.addColumns(forceOneLength ? 1 : dataLength)
           .sheet
           .getRange(1, this.sheet.getLastColumn() + 1, dataLength, 1)
           .setValues(data);
       } catch (e) {
-        throw '추가하려는 셀 데이터가 실제 시트의 행 개수 보다 많습니다.';
+        throw 'The cell data you want to add is more than the number of rows in the actual sheet.';
       }
     } else if (typeof data === 'string') {
       try {
         this.sheet.getRange(1, this.sheet.getLastColumn() + 1).setValue(data);
       } catch (e) {
-        throw '셀 데이터 입력 도중 문제가 발생했습니다.';
+        throw 'A problem occurred while entering cell data.';
       }
     }
 
@@ -402,7 +402,7 @@ class SheetMan {
     } else if (typeof data === 'string') {
       this.getRange(this.sheet.getLastRow() + 1, 1).setValue(data);
     } else {
-      throw '올바른 데이터 형식이 아닙니다.';
+      throw 'It is not a valid data type.';
     }
 
     return this;
