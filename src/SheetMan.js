@@ -1,6 +1,5 @@
 class SheetMan {
   constructor () {
-    this.Utils = new Utils();
     this.SheetApp = SpreadsheetApp;
     this.Sheets = Sheets;
     this.activeSheet = this.SheetApp.getActiveSpreadsheet();
@@ -15,7 +14,7 @@ class SheetMan {
       this.sheet.getActiveSheet().setName(nameForFirstSheet);
     }
 
-    this.sheet.createdSheetId = this.Utils.getFileIdByUrl(this.sheet.getUrl());
+    this.sheet.createdSheetId = this.getFileIdByUrl();
 
     return this;
   }
@@ -29,6 +28,11 @@ class SheetMan {
     this.sheet.createdSheetId = newFile.spreadsheetId;
 
     return this;
+  }
+
+  getFileIdByUrl () {
+    // https://docs.google.com/spreadsheets/d/{SheetId}/edit#gid={gid}
+    return this.sheet.getUrl().split('/')[5];
   }
 
   getFileId () {
