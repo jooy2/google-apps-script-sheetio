@@ -1,4 +1,11 @@
 # gas-sheetman
+
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jooy2/gas-sheetman/blob/master/LICENSE)
+[![Followers](https://img.shields.io/github/followers/jooy2?style=social)](https://github.com/jooy2)
+![Stars](https://img.shields.io/github/stars/jooy2/gas-sheetman?style=social)
+![Line Count](https://img.shields.io/tokei/lines/github/jooy2/gas-sheetman)
+![Repo Size](https://img.shields.io/github/repo-size/jooy2/gas-sheetman)
+
 Easy to use **[Google Apps Script](https://script.google.com/)** [Spreadsheet API](https://developers.google.com/apps-script/reference/spreadsheet) (using Method chaining)
 
 ## Features
@@ -37,13 +44,7 @@ targetSheet
 ```
 
 ## Methods
-### Create and Edit File
-
-❗❗❗ The document is not yet complete. Please refer to `src/SheetMan.js` for the full method. ❗❗❗
-
-| Method | Params | Description | Example |
-| --- | --- | --- | --- |
-| `createFile` | <li>title **{String}**</li><li>nameForFirstSheet **{String}**</li> | Create a new Spreadsheet file. title is the name of the file, and nameForFirstSheet (optional) is the name of the sheet to be created when you first create it. | ```createFile()``` |
+Related descriptions are attached to the entire method of `SheetMan.js`, and the main method of the default API commonly used in Spreadsheet of **Google Apps Script** is overridden.
 
 ## License
 Copyright © 2021 Jooy2 Released under the MIT license

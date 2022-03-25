@@ -1,5 +1,5 @@
 {
-  "name": "appscript-sheetman",
+  "name": "gas-sheetman",
   "version": "1.0.0",
   "description": "Easy to use Google Apps Script Spreadsheet API (using Method chaining)",
   "main": "SheetMan.js",
