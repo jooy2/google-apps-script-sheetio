@@ -307,6 +307,10 @@ class SheetMan {
   }
 
   clearFormat () {
+    this.sheet.activeRange.clearFormat();
+  }
+
+  clearFormats () {
     this.sheet.clearFormats();
     return this;
   }
