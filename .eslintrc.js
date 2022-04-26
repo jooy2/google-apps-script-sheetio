@@ -17,6 +17,6 @@ module.exports = {
     'no-unused-expressions': 1,
     'no-unused-vars': 1,
     'space-before-function-paren': ['error', 'always'],
-    'class-methods-use-this': 1
+    'class-methods-use-this': 1,
   },
 };
