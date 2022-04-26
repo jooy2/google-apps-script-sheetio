@@ -148,8 +148,15 @@ class SheetMan {
     return SpreadsheetApp.getActiveSpreadsheet().getId();
   }
 
+  getSheets () {
+    if (!this.activeSheet) {
+      return [];
+    }
+    return this.activeSheet.getSheets();
+  }
+
   getSheetCount () {
-    return this.activeSheet.getSheets().length;
+    return this.getSheets().length;
   }
 
   getRange (startRow, startColumn, rows, columns) {
