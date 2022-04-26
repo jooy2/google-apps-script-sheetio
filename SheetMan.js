@@ -1,3 +1,6 @@
+/*
+* SheetMan (https://github.com/jooy2/gas-sheetman)
+* */
 class SheetMan {
   constructor () {
     this.activeSheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -374,11 +377,11 @@ class SheetMan {
 
   insertLastColumn (data, forceOneLength = false) {
     if (typeof data === 'object') {
+      const dataLength = data.length;
+      if (dataLength < 1) {
+        throw 'There is no data to add.';
+      }
       try {
-        const dataLength = data.length;
-        if (dataLength < 1) {
-          throw 'There is no data to add.';
-        }
         this.addColumns(forceOneLength ? 1 : dataLength)
           .sheet
           .getRange(1, this.sheet.getLastColumn() + 1, dataLength, 1)
@@ -507,10 +510,12 @@ class SheetMan {
   }
 
   convertColumnToString (position) {
-    const columnCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
+    const columnCharacters = [
+      'A', 'B', 'C', 'D', 'E', 'F', 'G',
       'H', 'I', 'J', 'K', 'L', 'M', 'N',
       'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-      'V', 'W', 'X', 'Y', 'Z'];
+      'V', 'W', 'X', 'Y', 'Z',
+    ];
 
     for (let i = 1, columnLength = columnCharacters.length; i < columnLength; i += 1) {
       if (position === i) {
