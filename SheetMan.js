@@ -250,6 +250,8 @@ class SheetMan {
 
   setWrap (wrap) {
     this.sheet.activeRange.setWrap(wrap);
+
+    return this;
   }
 
   setRowHeight (row, height) {
@@ -262,6 +264,8 @@ class SheetMan {
 
   setBorder (border) {
     this.sheet.activeRange.setBorder(border);
+
+    return this;
   }
 
   setHeader (config) {
@@ -274,31 +278,45 @@ class SheetMan {
 
   setBackground (color) {
     this.sheet.activeRange.setBackground(color);
+
+    return this;
   }
 
   setColor (color) {
     this.sheet.activeRange.setFontColor(color);
+
+    return this;
   }
 
   setWeight (weight) {
     this.sheet.activeRange.setFontWeight(weight);
+
+    return this;
   }
 
   setSize (size) {
     this.sheet.activeRange.setFontSize(size);
+
+    return this;
   }
 
   setFamily (family) {
     this.sheet.activeRange.setFontFamily(family);
+
+    return this;
   }
 
   setStyle (data) {
     data.background && this.setBackground(data.background);
     data.color && this.setColor(data.color);
+
+    return this;
   }
 
   setShowHyperlink (showHyperlink) {
     this.sheet.activeRange.setShowHyperlink(showHyperlink);
+
+    return this;
   }
 
   expand (columnCount, rowCount) {
@@ -313,10 +331,13 @@ class SheetMan {
 
   clearFormat () {
     this.sheet.activeRange.clearFormat();
+
+    return this;
   }
 
   clearFormats () {
     this.sheet.clearFormats();
+
     return this;
   }
 
@@ -336,6 +357,7 @@ class SheetMan {
   copyToExt (originalSheet, targetSheet, startRow, startColumn) {
     this.active(targetSheet).getRange(startRow, startColumn);
     this.sheet.activeRange.copyTo(this.sheet.activeRange);
+
     return this.active(originalSheet);
   }
 
