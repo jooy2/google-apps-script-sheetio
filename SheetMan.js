@@ -51,12 +51,13 @@ class SheetMan {
   }
 
   targetTo (sheetId) {
-    if (sheetId === 'self') {
-      this.isExternalSheet = false;
-      this.sheet = this.originSheet;
-    } else {
+    if (sheetId) {
       this.isExternalSheet = true;
       this.sheet = SpreadsheetApp.openById(sheetId);
+    } else {
+      // Target to self sheet
+      this.isExternalSheet = false;
+      this.sheet = this.originSheet;
     }
 
     this.activeSheet = this.sheet;
@@ -65,10 +66,7 @@ class SheetMan {
   }
 
   targetSelf () {
-    this.isExternalSheet = false;
-    this.sheet = this.originSheet;
-
-    this.activeSheet = this.sheet;
+    this.targetTo();
 
     return this;
   }
