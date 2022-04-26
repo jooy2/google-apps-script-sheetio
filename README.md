@@ -13,7 +13,40 @@ Easy to use **[Google Apps Script](https://script.google.com/)** [Spreadsheet AP
 - Handling of external Google Sheets files
 
 ## Installation
-Put the `SheetMan.js` file in project src directory into your new **[Google Apps Script](https://script.google.com/)** project file and use it.
+
+### Installation using `clasp`
+The clasp package must be installed for automatic installation in `Google Drive`.
+
+```shell
+$ npm install -g @google/clasp
+```
+
+If you have set up the development environment in this project, you can install it through `npm i`, so you don't need to install the package globally.
+
+You may need a `clasp` login before proceeding. Skip if you have already done this:
+
+```shell
+$ clasp login
+```
+
+Then run one of the following commands:
+
+```shell
+$ clasp create
+```
+
+or...
+
+```shell
+$ npm run create
+```
+
+Follow the `clasp`'s prompts to create a spreadsheet in the `Google Drive` top-level path. After you open that sheet, the script will be installed automatically.
+
+### Manual Installation
+Put the `SheetMan.js` file in project directory into your new **[Google Apps Script](https://script.google.com/)** project file and use it.
+
+You can also use additional `App.js` and `Test.js` files if necessary.
 
 ## Usage
 
@@ -45,6 +78,10 @@ targetSheet
 
 ## Methods
 Related descriptions are attached to the entire method of `SheetMan.js`, and the main method of the default API commonly used in Spreadsheet of **Google Apps Script** is overridden.
+
+Not all Spreadsheet methods may be compatible. If there is a method you would like to request, please leave an issue or send a PR.
+
+See: https://developers.google.com/apps-script/reference/spreadsheet
 
 ## License
 Copyright © 2021 Jooy2 Released under the MIT license
