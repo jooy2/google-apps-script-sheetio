@@ -1,0 +1,15 @@
+.eslintrc.js
+.gitignore
+.npmignore
+package.json
+package-lock.json
+node_modules/**
+node_modules/**/.*/**
+node_modules/**/.*
+.idea/**
+.idea/**/.*/**
+.idea/**/.*
+README.md
+Thumbs.db
+.DS_Store
+LICENSE
