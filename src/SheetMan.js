@@ -1,14 +1,12 @@
 class SheetMan {
   constructor () {
-    this.SheetApp = SpreadsheetApp;
-    this.Sheets = Sheets;
-    this.activeSheet = this.SheetApp.getActiveSpreadsheet();
+    this.activeSheet = SpreadsheetApp.getActiveSpreadsheet();
     this.originSheet = this.activeSheet;
     this.sheet = null;
   }
 
   createFile (title, nameForFirstSheet) {
-    this.sheet = this.SheetApp.create(title);
+    this.sheet = SpreadsheetApp.create(title);
 
     if (arguments.length === 2) {
       this.sheet.getActiveSheet().setName(nameForFirstSheet);
@@ -20,11 +18,11 @@ class SheetMan {
   }
 
   createFileUsingApi (title) {
-    const sheet = this.Sheets.newSpreadsheet();
-    sheet.properties = this.Sheets.newSpreadsheetProperties();
+    const sheet = Sheets.newSpreadsheet();
+    sheet.properties = Sheets.newSpreadsheetProperties();
     sheet.properties.title = title;
 
-    const newFile = this.Sheets.SpreadSheets.create(sheet);
+    const newFile = Sheets.SpreadSheets.create(sheet);
     this.sheet.createdSheetId = newFile.spreadsheetId;
 
     return this;
@@ -38,7 +36,7 @@ class SheetMan {
   getFileId () {
     return this.sheet.createdSheetId
       ? this.sheet.createdSheetId
-      : this.SheetApp.getActiveSpreadsheet().getId();
+      : SpreadsheetApp.getActiveSpreadsheet().getId();
   }
 
   getSheetId () {
@@ -55,7 +53,7 @@ class SheetMan {
       this.sheet = this.originSheet;
     } else {
       this.isExternalSheet = true;
-      this.sheet = this.SheetApp.openById(sheetId);
+      this.sheet = SpreadsheetApp.openById(sheetId);
     }
 
     this.activeSheet = this.sheet;
@@ -115,7 +113,7 @@ class SheetMan {
 
   destroy () {
     try {
-      this.SheetApp.getActive().deleteSheet(this.sheet);
+      SpreadsheetApp.getActive().deleteSheet(this.sheet);
     } catch (e) {
       throw `Failed to delete sheet '${this.sheet.name}'.`;
     }
@@ -131,13 +129,13 @@ class SheetMan {
   }
 
   flush () {
-    this.SheetApp.flush();
+    SpreadsheetApp.flush();
 
     return this;
   }
 
   getId () {
-    return this.SheetApp.getActiveSpreadsheet().getId();
+    return SpreadsheetApp.getActiveSpreadsheet().getId();
   }
 
   getSheetCount () {
