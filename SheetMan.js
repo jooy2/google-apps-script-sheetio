@@ -297,6 +297,10 @@ class SheetMan {
     data.color && this.setColor(data.color);
   }
 
+  setShowHyperlink (showHyperlink) {
+    this.sheet.activeRange.setShowHyperlink(showHyperlink);
+  }
+
   expand (columnCount, rowCount) {
     if (columnCount > 0) {
       this.addColumns(columnCount);
