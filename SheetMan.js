@@ -135,6 +135,15 @@ class SheetMan {
     return this;
   }
 
+  moveActiveSheet (pos) {
+    if (!pos || pos < 1) {
+      throw 'Invalid pos value.';
+    }
+    this.sheet.moveActiveSheet();
+
+    return this;
+  }
+
   getId () {
     return SpreadsheetApp.getActiveSpreadsheet().getId();
   }
