@@ -91,13 +91,9 @@ class SheetMan {
 
   create (sheetName) {
     try {
-      this.sheet = this.activeSheet.getSheetByName(sheetName);
-
-      if (!this.sheet) {
-        this.sheet = this.activeSheet.insertSheet(sheetName).activate();
-      }
+      this.sheet = this.activeSheet.insertSheet(sheetName, this.getSheetCount());
     } catch (e) {
-      throw `'${sheetName}' Failed to create sheet. Either it already exists or the error is unknown.`;
+      // Do nothing
     }
     return this;
   }
