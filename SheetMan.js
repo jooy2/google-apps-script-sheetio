@@ -144,6 +144,10 @@ class SheetMan {
     return SpreadsheetApp.getActiveSpreadsheet().getId();
   }
 
+  getActiveSheet () {
+    return this.activeSheet;
+  }
+
   getSheets () {
     if (!this.activeSheet) {
       return [];
