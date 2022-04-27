@@ -43,6 +43,12 @@ $ npm run create
 
 Follow the `clasp`'s prompts to create a spreadsheet in the `Google Drive` top-level path. After you open that sheet, the script will be installed automatically.
 
+Make sure a `.clasp.json` file is created in your project root. After that, you can install the script into the document with the command below.
+
+```shell
+$ clasp push
+```
+
 ### Manual Installation
 Put the `SheetMan.js` file in project directory into your new **[Google Apps Script](https://script.google.com/)** project file and use it.
 
