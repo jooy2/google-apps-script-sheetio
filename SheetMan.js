@@ -486,7 +486,7 @@ class SheetMan {
     const max = isRow ? this.sheet.getMaxRows() : this.sheet.getMaxColumns();
 
     if (isRow) {
-      // 헤더 행을 포함
+      // Include header row
       const frozenRows = this.getFrozenRows();
 
       if (frozenRows > 0) {
