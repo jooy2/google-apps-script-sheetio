@@ -15,6 +15,9 @@ Easy to use **[Google Apps Script](https://script.google.com/)** [Spreadsheet AP
 ## Installation
 
 ### Installation using `clasp`
+
+In order to properly use all configuration of `clasp`, you need to change the Enabled setting of Google Apps Script API to 'Enable' after logging in with your Google account on the next page: https://script.google.com/home/usersettings
+
 The clasp package must be installed for automatic installation in `Google Drive`.
 
 ```shell
