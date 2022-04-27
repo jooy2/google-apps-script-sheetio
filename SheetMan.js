@@ -110,7 +110,7 @@ class SheetMan {
 
   destroy () {
     try {
-      SpreadsheetApp.getActive().deleteSheet(this.sheet);
+      this.activeSheet.deleteSheet(this.sheet);
     } catch (e) {
       throw `Failed to delete sheet '${this.sheet.name}'.`;
     }
