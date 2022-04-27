@@ -355,24 +355,14 @@ class SheetMan {
     return this;
   }
 
-  copyTo (startRow, startColumn) {
-    this.sheet.activeRange.copyTo(this.sheet.getRange(startRow, startColumn));
+  copyTo (destination) {
+    if (this.sheet.activeRange) {
+      this.sheet.activeRange.copyTo(destination);
+    } else {
+      this.sheet.copyTo(destination);
+    }
 
     return this;
-  }
-
-  copyToOnlyData (startRow, startColumn) {
-    this.sheet.activeRange
-      .copyTo(this.sheet.getRange(startRow, startColumn), { contentsOnly: true });
-
-    return this;
-  }
-
-  copyToExt (originalSheet, targetSheet, startRow, startColumn) {
-    this.active(targetSheet).getRange(startRow, startColumn);
-    this.sheet.activeRange.copyTo(this.sheet.activeRange);
-
-    return this.active(originalSheet);
   }
 
   addRows (count) {
