@@ -10,6 +10,7 @@ class SheetMan {
 
   /*
   * Begin of Google Apps Script Spreadsheet Wrapper
+  * https://developers.google.com/apps-script/reference/spreadsheet
   * */
 
   getSheetId () {
@@ -373,6 +374,11 @@ class SheetMan {
   * End of Google Apps Script Spreadsheet Wrapper
   * */
 
+  /*
+  * Begin of SheetMan methods
+  * https://developers.google.com/apps-script/reference/spreadsheet
+  * */
+
   createFile (title, nameForFirstSheet) {
     this.sheet = SpreadsheetApp.create(title);
 
@@ -649,13 +655,10 @@ class SheetMan {
       'O', 'P', 'Q', 'R', 'S', 'T', 'U',
       'V', 'W', 'X', 'Y', 'Z',
     ];
-
-    for (let i = 1, columnLength = columnCharacters.length; i < columnLength; i += 1) {
-      if (position === i) {
-        return columnCharacters[i - 1];
-      }
-    }
-
-    return this;
+    return columnCharacters[position - 1];
   }
+
+  /*
+  * End of SheetMan methods
+  * */
 }
