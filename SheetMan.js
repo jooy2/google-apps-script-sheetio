@@ -129,14 +129,12 @@ class SheetMan {
     return this;
   }
 
-  sort (column) {
-    this.sheet.sort(column);
-
-    return this;
-  }
-
-  sortMultiple (config) {
-    this.sheet.activeRange.sort(config);
+  sort (sortSpec) {
+    if (this.sheet.activeRange) {
+      this.sheet.activeRange.sort(sortSpec);
+    } else {
+      this.sheet.sort(sortSpec);
+    }
 
     return this;
   }
@@ -159,8 +157,14 @@ class SheetMan {
     return this;
   }
 
-  setWrap (wrap) {
-    this.sheet.activeRange.setWrap(wrap);
+  setWrap (isWrapEnabled) {
+    this.sheet.activeRange.setWrap(isWrapEnabled);
+
+    return this;
+  }
+
+  setWraps (isWrapEnabled) {
+    this.sheet.activeRange.setWraps(isWrapEnabled);
 
     return this;
   }
@@ -211,14 +215,104 @@ class SheetMan {
     return this;
   }
 
-  setFontFamily (family) {
-    this.sheet.activeRange.setFontFamily(family);
+  setFontFamily (fontFamily) {
+    this.sheet.activeRange.setFontFamily(fontFamily);
+
+    return this;
+  }
+
+  setFontFamilies (fontFamilies) {
+    this.sheet.activeRange.setFontFamilies(fontFamilies);
+
+    return this;
+  }
+
+  setFontLine (fontLine) {
+    this.sheet.activeRange.setFontLine(fontLine);
+
+    return this;
+  }
+
+  setFontLines (fontLine) {
+    this.sheet.activeRange.setFontLines(fontLine);
+
+    return this;
+  }
+
+  setFormula (formula) {
+    this.sheet.activeRange.setFormula(formula);
+
+    return this;
+  }
+
+  setFormulas (formulas) {
+    this.sheet.activeRange.setFormulas(formulas);
+
+    return this;
+  }
+
+  setRichTextValue (value) {
+    this.sheet.activeRange.setRichTextValue(value);
+
+    return this;
+  }
+
+  setRichTextValues (values) {
+    this.sheet.activeRange.setRichTextValues(values);
+
+    return this;
+  }
+
+  setTextDirection (direction) {
+    this.sheet.activeRange.setTextDirection(direction);
+
+    return this;
+  }
+
+  setTextDirections (directions) {
+    this.sheet.activeRange.setTextDirections(directions);
+
+    return this;
+  }
+
+  setTextRotation (degrees) {
+    this.sheet.activeRange.setTextRotation(degrees);
+
+    return this;
+  }
+
+  setTextRotations (rotation) {
+    this.sheet.activeRange.setTextRotations(rotation);
+
+    return this;
+  }
+
+  setTextStyle (style) {
+    this.sheet.activeRange.setTextStyle(style);
+
+    return this;
+  }
+
+  setTextStyles (styles) {
+    this.sheet.activeRange.setTextStyles(styles);
 
     return this;
   }
 
   setShowHyperlink (showHyperlink) {
     this.sheet.activeRange.setShowHyperlink(showHyperlink);
+
+    return this;
+  }
+
+  setNote (note) {
+    this.sheet.activeRange.setNote(note);
+
+    return this;
+  }
+
+  setNotes (notes) {
+    this.sheet.activeRange.setNotes(notes);
 
     return this;
   }
@@ -297,6 +391,7 @@ class SheetMan {
     sheet.properties.title = title;
 
     const newFile = Sheets.SpreadSheets.create(sheet);
+    this.sheet.activeRange = null;
     this.sheet.createdSheetId = newFile.spreadsheetId;
 
     return this;
@@ -323,6 +418,7 @@ class SheetMan {
       this.sheet = this.originSheet;
     }
 
+    this.sheet.activeRange = null;
     this.activeSheet = this.sheet;
 
     return this;
@@ -336,7 +432,9 @@ class SheetMan {
 
   active (sheetName) {
     this.sheet = this.activeSheet.getSheetByName(sheetName);
-    if (this.sheet) this.sheet.name = sheetName;
+    if (this.sheet) {
+      this.sheet.name = sheetName;
+    }
 
     if (sheetName.length < 1 || !this.sheet) {
       throw `'${sheetName}' The sheet does not exist. To create it, use create().`;
@@ -358,6 +456,10 @@ class SheetMan {
 
   getSheetCount () {
     return this.getSheets().length;
+  }
+
+  removeRange () {
+    this.sheet.activeRange = null;
   }
 
   create (sheetName) {
