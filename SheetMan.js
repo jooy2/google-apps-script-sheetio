@@ -8,104 +8,16 @@ class SheetMan {
     this.sheet = null;
   }
 
-  createFile (title, nameForFirstSheet) {
-    this.sheet = SpreadsheetApp.create(title);
-
-    if (arguments.length === 2) {
-      this.sheet.getActiveSheet().setName(nameForFirstSheet);
-    }
-
-    this.sheet.createdSheetId = this.getFileIdByUrl();
-
-    return this;
-  }
-
-  createFileUsingApi (title) {
-    const sheet = Sheets.newSpreadsheet();
-    sheet.properties = Sheets.newSpreadsheetProperties();
-    sheet.properties.title = title;
-
-    const newFile = Sheets.SpreadSheets.create(sheet);
-    this.sheet.createdSheetId = newFile.spreadsheetId;
-
-    return this;
-  }
-
-  getFileIdByUrl () {
-    // https://docs.google.com/spreadsheets/d/{SheetId}/edit#gid={gid}
-    return this.sheet.getUrl().split('/')[5];
-  }
-
-  getFileId () {
-    return this.sheet.createdSheetId
-      ? this.sheet.createdSheetId
-      : SpreadsheetApp.getActiveSpreadsheet().getId();
-  }
+  /*
+  * Begin of Google Apps Script Spreadsheet Wrapper
+  * */
 
   getSheetId () {
     return this.sheet.getSheetId();
   }
 
-  getSheetName () {
+  getName () {
     return this.sheet.getName();
-  }
-
-  targetTo (sheetId) {
-    if (sheetId) {
-      this.isExternalSheet = true;
-      this.sheet = SpreadsheetApp.openById(sheetId);
-    } else {
-      // Target to self sheet
-      this.isExternalSheet = false;
-      this.sheet = this.originSheet;
-    }
-
-    this.activeSheet = this.sheet;
-
-    return this;
-  }
-
-  targetSelf () {
-    this.targetTo();
-
-    return this;
-  }
-
-  active (sheetName) {
-    this.sheet = this.activeSheet.getSheetByName(sheetName);
-    if (this.sheet) this.sheet.name = sheetName;
-
-    if (sheetName.length < 1 || !this.sheet) {
-      throw `'${sheetName}' The sheet does not exist. To create it, use create().`;
-    }
-
-    return this;
-  }
-
-  isExist (sheetName) {
-    if (this.isExternalSheet) {
-      return this.sheet ? this.sheet.getSheetByName(sheetName) : null;
-    }
-    return this.activeSheet.getSheetByName(sheetName);
-  }
-
-  create (sheetName) {
-    try {
-      this.sheet = this.activeSheet.insertSheet(sheetName, this.getSheetCount());
-    } catch (e) {
-      // Do nothing
-    }
-    return this;
-  }
-
-  rename (renameTo) {
-    if (!renameTo || renameTo.length < 1) {
-      throw `Could not change sheet '${this.sheet.name}' to '${renameTo}'.`;
-    }
-
-    this.sheet.setName(renameTo);
-
-    return this;
   }
 
   destroy () {
@@ -115,13 +27,6 @@ class SheetMan {
       throw `Failed to delete sheet '${this.sheet.name}'.`;
     }
 
-    return this;
-  }
-
-  destroyByName (sheetName) {
-    if (sheetName && this.isExist(sheetName)) {
-      return this.active(sheetName).destroy();
-    }
     return this;
   }
 
@@ -144,19 +49,11 @@ class SheetMan {
     return SpreadsheetApp.getActiveSpreadsheet().getId();
   }
 
-  getActiveSheet () {
-    return this.activeSheet;
-  }
-
   getSheets () {
     if (!this.activeSheet) {
       return [];
     }
     return this.activeSheet.getSheets();
-  }
-
-  getSheetCount () {
-    return this.getSheets().length;
   }
 
   getRange (startRow, startColumn, rows, columns) {
@@ -225,7 +122,7 @@ class SheetMan {
     return this;
   }
 
-  setFormat (format) {
+  setNumberFormat (format) {
     // https://developers.google.com/sheets/api/guides/formats
     this.sheet.activeRange.setNumberFormat(format);
 
@@ -244,19 +141,19 @@ class SheetMan {
     return this;
   }
 
-  setAlignHorizontal (align) {
+  setHorizontalAlignment (align) {
     this.sheet.activeRange.setHorizontalAlignment(align);
 
     return this;
   }
 
-  setAlignVertical (align) {
+  setVerticalAlignment (align) {
     this.sheet.activeRange.setVerticalAlignment(align);
 
     return this;
   }
 
-  setWidth (column, width) {
+  setColumnWidth (column, width) {
     this.sheet.setColumnWidth(column, width);
 
     return this;
@@ -296,33 +193,26 @@ class SheetMan {
     return this;
   }
 
-  setColor (color) {
+  setFontColor (color) {
     this.sheet.activeRange.setFontColor(color);
 
     return this;
   }
 
-  setWeight (weight) {
+  setFontWeight (weight) {
     this.sheet.activeRange.setFontWeight(weight);
 
     return this;
   }
 
-  setSize (size) {
+  setFontSize (size) {
     this.sheet.activeRange.setFontSize(size);
 
     return this;
   }
 
-  setFamily (family) {
+  setFontFamily (family) {
     this.sheet.activeRange.setFontFamily(family);
-
-    return this;
-  }
-
-  setStyle (data) {
-    data.background && this.setBackground(data.background);
-    data.color && this.setColor(data.color);
 
     return this;
   }
@@ -330,16 +220,6 @@ class SheetMan {
   setShowHyperlink (showHyperlink) {
     this.sheet.activeRange.setShowHyperlink(showHyperlink);
 
-    return this;
-  }
-
-  expand (columnCount, rowCount) {
-    if (columnCount > 0) {
-      this.addColumns(columnCount);
-    }
-    if (rowCount > 0) {
-      this.addRows(rowCount);
-    }
     return this;
   }
 
@@ -362,6 +242,157 @@ class SheetMan {
       this.sheet.copyTo(destination);
     }
 
+    return this;
+  }
+
+  merge () {
+    this.sheet.activeRange.merge();
+
+    return this;
+  }
+
+  mergeAcross () {
+    this.sheet.activeRange.mergeAcross();
+
+    return this;
+  }
+
+  clearContents () {
+    this.sheet.clearContents();
+
+    return this;
+  }
+
+  deleteColumn (index) {
+    this.sheet.deleteColumn(index);
+
+    return this;
+  }
+
+  deleteRow (index) {
+    this.sheet.deleteRow(index + 1);
+
+    return this;
+  }
+
+  /*
+  * End of Google Apps Script Spreadsheet Wrapper
+  * */
+
+  createFile (title, nameForFirstSheet) {
+    this.sheet = SpreadsheetApp.create(title);
+
+    if (arguments.length === 2) {
+      this.sheet.getActiveSheet().setName(nameForFirstSheet);
+    }
+
+    this.sheet.createdSheetId = this.getFileIdByUrl();
+
+    return this;
+  }
+
+  createFileUsingApi (title) {
+    const sheet = Sheets.newSpreadsheet();
+    sheet.properties = Sheets.newSpreadsheetProperties();
+    sheet.properties.title = title;
+
+    const newFile = Sheets.SpreadSheets.create(sheet);
+    this.sheet.createdSheetId = newFile.spreadsheetId;
+
+    return this;
+  }
+
+  getFileIdByUrl () {
+    // https://docs.google.com/spreadsheets/d/{SheetId}/edit#gid={gid}
+    return this.sheet.getUrl().split('/')[5];
+  }
+
+  getFileId () {
+    return this.sheet.createdSheetId
+      ? this.sheet.createdSheetId
+      : SpreadsheetApp.getActiveSpreadsheet().getId();
+  }
+
+  targetTo (sheetId) {
+    if (sheetId) {
+      this.isExternalSheet = true;
+      this.sheet = SpreadsheetApp.openById(sheetId);
+    } else {
+      // Target to self sheet
+      this.isExternalSheet = false;
+      this.sheet = this.originSheet;
+    }
+
+    this.activeSheet = this.sheet;
+
+    return this;
+  }
+
+  targetSelf () {
+    this.targetTo();
+
+    return this;
+  }
+
+  active (sheetName) {
+    this.sheet = this.activeSheet.getSheetByName(sheetName);
+    if (this.sheet) this.sheet.name = sheetName;
+
+    if (sheetName.length < 1 || !this.sheet) {
+      throw `'${sheetName}' The sheet does not exist. To create it, use create().`;
+    }
+
+    return this;
+  }
+
+  isExist (sheetName) {
+    if (this.isExternalSheet) {
+      return this.sheet ? this.sheet.getSheetByName(sheetName) : null;
+    }
+    return this.activeSheet.getSheetByName(sheetName);
+  }
+
+  getActiveSheet () {
+    return this.activeSheet;
+  }
+
+  getSheetCount () {
+    return this.getSheets().length;
+  }
+
+  create (sheetName) {
+    try {
+      this.sheet = this.activeSheet.insertSheet(sheetName, this.getSheetCount());
+    } catch (e) {
+      // Do nothing
+    }
+    return this;
+  }
+
+  rename (renameTo) {
+    if (!renameTo || renameTo.length < 1) {
+      throw `Could not change sheet '${this.sheet.name}' to '${renameTo}'.`;
+    }
+
+    this.sheet.setName(renameTo);
+
+    return this;
+  }
+
+  destroyByName (sheetName) {
+    if (sheetName && this.isExist(sheetName)) {
+      return this.active(sheetName).destroy();
+    }
+    return this;
+  }
+
+  expand (columnCount, rowCount) {
+    if (columnCount > 0) {
+      this.addColumns(columnCount);
+    }
+    if (rowCount > 0) {
+      this.addRows(rowCount);
+    }
     return this;
   }
 
@@ -389,18 +420,6 @@ class SheetMan {
     } catch (e) {
       throw 'A problem occurred while adding columns.';
     }
-
-    return this;
-  }
-
-  insertColumnAfter (index) {
-    this.sheet.insertColumnAfter(index);
-
-    return this;
-  }
-
-  insertRowAfter (index) {
-    this.sheet.insertRowAfter(index);
 
     return this;
   }
@@ -447,32 +466,14 @@ class SheetMan {
     return this;
   }
 
-  merge () {
-    this.sheet.activeRange.merge();
+  insertColumnAfter (index) {
+    this.sheet.insertColumnAfter(index);
 
     return this;
   }
 
-  mergeAcross () {
-    this.sheet.activeRange.mergeAcross();
-
-    return this;
-  }
-
-  clearAll () {
-    this.sheet.clearContents();
-
-    return this;
-  }
-
-  deleteColumn (index) {
-    this.sheet.deleteColumn(index);
-
-    return this;
-  }
-
-  deleteRow (index) {
-    this.sheet.deleteRow(index + 1);
+  insertRowAfter (index) {
+    this.sheet.insertRowAfter(index);
 
     return this;
   }
