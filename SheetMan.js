@@ -340,6 +340,12 @@ class SheetMan {
     return this;
   }
 
+  moveTo (target) {
+    this.sheet.activeRange.moveTo(target);
+
+    return this;
+  }
+
   merge () {
     this.sheet.activeRange.merge();
 
