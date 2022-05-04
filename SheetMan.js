@@ -352,6 +352,12 @@ class SheetMan {
     return this;
   }
 
+  mergeVertically () {
+    this.sheet.activeRange.mergeVertically();
+
+    return this;
+  }
+
   clearContents () {
     this.sheet.clearContents();
 
