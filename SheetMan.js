@@ -450,6 +450,7 @@ class SheetMan {
 
   active (sheetName) {
     this.sheet = this.activeSheet.getSheetByName(sheetName);
+
     if (this.sheet) {
       this.sheet.name = sheetName;
     }
@@ -483,8 +484,12 @@ class SheetMan {
   create (sheetName) {
     try {
       this.sheet = this.activeSheet.insertSheet(sheetName, this.getSheetCount());
+
+      if (this.sheet) {
+        this.sheet.name = sheetName;
+      }
     } catch (e) {
-      // Do nothing
+      this.active(sheetName);
     }
     return this;
   }
