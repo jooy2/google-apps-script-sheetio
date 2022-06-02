@@ -665,7 +665,7 @@ class SheetMan {
     return this;
   }
 
-  getColumnToString (position) {
+  static getColumnToString (position) {
     return [
       'A', 'B', 'C', 'D', 'E', 'F', 'G',
       'H', 'I', 'J', 'K', 'L', 'M', 'N',
