@@ -382,6 +382,14 @@ class SheetMan {
     return this;
   }
 
+  check () {
+    this.sheet.activeRange.check();
+  }
+
+  uncheck () {
+    this.sheet.activeRange.uncheck();
+  }
+
   /*
   * End of Google Apps Script Spreadsheet Wrapper
   * */
