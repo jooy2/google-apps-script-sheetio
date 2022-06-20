@@ -509,6 +509,10 @@ class SheetMan {
     return this.activeSheet;
   }
 
+  getActiveRange () {
+    return this.sheet.activeRange;
+  }
+
   getSheetCount () {
     return this.getSheets().length;
   }
