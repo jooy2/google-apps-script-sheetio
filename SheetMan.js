@@ -318,6 +318,34 @@ class SheetMan {
     return this;
   }
 
+  isBlank () {
+    return this.sheet.activeRange.isBlank();
+  }
+
+  isChecked () {
+    return this.sheet.activeRange.isChecked();
+  }
+
+  isEndColumnBounded () {
+    return this.sheet.activeRange.isEndColumnBounded();
+  }
+
+  isEndRowBounded () {
+    return this.sheet.activeRange.isEndRowBounded();
+  }
+
+  isStartColumnBounded () {
+    return this.sheet.activeRange.isStartColumnBounded();
+  }
+
+  isStartRowBounded () {
+    return this.sheet.activeRange.isStartColumnBounded();
+  }
+
+  isPartOfMerge () {
+    return this.sheet.activeRange.isPartOfMerge();
+  }
+
   clearFormat () {
     this.sheet.activeRange.clearFormat();
 
