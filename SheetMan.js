@@ -346,6 +346,70 @@ class SheetMan {
     return this.sheet.activeRange.isPartOfMerge();
   }
 
+  createDataSourcePivotTable (dataSource) {
+    this.sheet.activeRange.createDataSourcePivotTable(dataSource);
+
+    return this;
+  }
+
+  createDataSourceTable (dataSource) {
+    this.sheet.activeRange.createDataSourceTable(dataSource);
+
+    return this;
+  }
+
+  createDeveloperMetadataFinder () {
+    this.sheet.activeRange.createDeveloperMetadataFinder();
+
+    return this;
+  }
+
+  createFilter () {
+    this.sheet.activeRange.createFilter();
+
+    return this;
+  }
+
+  createPivotTable (sourceData) {
+    this.sheet.activeRange.createPivotTable(sourceData);
+
+    return this;
+  }
+
+  createTextFinder (findText) {
+    this.sheet.activeRange.createTextFinder(findText);
+
+    return this;
+  }
+
+  canEdit () {
+    return this.sheet.activeRange.canEdit();
+  }
+
+  randomize () {
+    this.sheet.activeRange = this.sheet.activeRange.randomize();
+
+    return this;
+  }
+
+  removeCheckboxes () {
+    this.sheet.activeRange = this.sheet.activeRange.removeCheckboxes();
+
+    return this;
+  }
+
+  removeDuplicates () {
+    this.sheet.activeRange = this.sheet.activeRange.removeDuplicates();
+
+    return this;
+  }
+
+  trimWhitespace () {
+    this.sheet.activeRange = this.sheet.activeRange.trimWhitespace();
+
+    return this;
+  }
+
   clearFormat () {
     this.sheet.activeRange.clearFormat();
 
