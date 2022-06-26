@@ -422,6 +422,12 @@ class SheetMan {
     return this;
   }
 
+  clearNotes () {
+    this.sheet.clearNotes();
+
+    return this;
+  }
+
   copyTo (destination) {
     if (this.sheet.activeRange) {
       this.sheet.activeRange.copyTo(destination);
