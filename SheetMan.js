@@ -47,7 +47,7 @@ class SheetMan {
   }
 
   getId () {
-    return SpreadsheetApp.getActiveSpreadsheet().getId();
+    return this.originSheet.getId();
   }
 
   getSheets () {
