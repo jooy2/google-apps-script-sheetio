@@ -529,7 +529,7 @@ class SheetMan {
   getFileId () {
     return this.sheet.createdSheetId
       ? this.sheet.createdSheetId
-      : SpreadsheetApp.getActiveSpreadsheet().getId();
+      : this.getId();
   }
 
   targetTo (sheetId) {
