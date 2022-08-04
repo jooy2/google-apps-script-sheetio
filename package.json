@@ -5,7 +5,7 @@
   "main": "SheetMan.js",
   "private": true,
   "scripts": {
-    "create": "clasp create"
+    "create": "node claspCreate.js"
   },
   "repository": {
     "type": "git",

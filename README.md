@@ -35,13 +35,15 @@ $ clasp login
 Then run one of the following commands:
 
 ```shell
-$ clasp create
+$ npm run create
 ```
 
-or...
+This npm script helps you quickly and easily push scripts to your new spreadsheet file using `clasp`.
+
+Or you can simply use `clasp create`.
 
 ```shell
-$ npm run create
+$ clasp create
 ```
 
 Follow the `clasp`'s prompts to create a spreadsheet in the `Google Drive` top-level path. After you open that sheet, the script will be installed automatically.
