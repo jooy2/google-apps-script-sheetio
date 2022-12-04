@@ -11,15 +11,15 @@
     "type": "git",
     "url": "git+https://github.com/jooy2/gas-sheetman.git"
   },
-  "author": "jooy2 <jootc.help@gmail.com>",
+  "author": "jooy2 <jooy2.contact@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jooy2/gas-sheetman/issues"
   },
   "homepage": "https://github.com/jooy2/gas-sheetman#readme",
   "devDependencies": {
-    "@google/clasp": "^2.4.1",
-    "eslint": "^8.21.0",
+    "@google/clasp": "^2.4.2",
+    "eslint": "^8.29.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0"
   }
