@@ -1,27 +1,27 @@
 /*
-* SheetMan (https://github.com/jooy2/gas-sheetman)
-* */
+ * SheetMan (https://github.com/jooy2/gas-sheetman)
+ * */
 class SheetMan {
-  constructor () {
+  constructor() {
     this.activeSheet = SpreadsheetApp.getActiveSpreadsheet();
     this.originSheet = this.activeSheet;
     this.sheet = null;
   }
 
   /*
-  * Begin of Google Apps Script Spreadsheet Wrapper
-  * https://developers.google.com/apps-script/reference/spreadsheet
-  * */
+   * Begin of Google Apps Script Spreadsheet Wrapper
+   * https://developers.google.com/apps-script/reference/spreadsheet
+   * */
 
-  getSheetId () {
+  getSheetId() {
     return this.sheet.getSheetId();
   }
 
-  getName () {
+  getName() {
     return this.sheet.getName();
   }
 
-  destroy () {
+  destroy() {
     try {
       this.activeSheet.deleteSheet(this.sheet);
     } catch (e) {
@@ -31,13 +31,13 @@ class SheetMan {
     return this;
   }
 
-  flush () {
+  flush() {
     SpreadsheetApp.flush();
 
     return this;
   }
 
-  moveActiveSheet (pos) {
+  moveActiveSheet(pos) {
     if (!pos || pos < 1) {
       throw 'Invalid pos value.';
     }
@@ -46,18 +46,18 @@ class SheetMan {
     return this;
   }
 
-  getId () {
+  getId() {
     return this.originSheet.getId();
   }
 
-  getSheets () {
+  getSheets() {
     if (!this.activeSheet) {
       return [];
     }
     return this.activeSheet.getSheets();
   }
 
-  getRange (startRow, startColumn, rows, columns) {
+  getRange(startRow, startColumn, rows, columns) {
     if (arguments.length === 1) {
       this.sheet.activeRange = this.sheet.getRange(startRow);
     } else if (arguments.length === 2) {
@@ -69,68 +69,68 @@ class SheetMan {
     return this;
   }
 
-  getDataRange () {
+  getDataRange() {
     this.sheet.activeRange = this.sheet.getDataRange();
 
     return this;
   }
 
-  getLastRow () {
+  getLastRow() {
     const lastRow = this.sheet.getLastRow();
 
     return lastRow === 0 ? 1 : lastRow;
   }
 
-  getLastColumn () {
+  getLastColumn() {
     const lastColumn = this.sheet.getLastColumn();
 
     return lastColumn === 0 ? 1 : lastColumn;
   }
 
-  getMaxRows () {
+  getMaxRows() {
     return this.sheet.getMaxRows();
   }
 
-  getMaxColumns () {
+  getMaxColumns() {
     return this.sheet.getMaxColumns();
   }
 
-  getFrozenRows () {
+  getFrozenRows() {
     return this.sheet.getFrozenRows();
   }
 
-  getFrozenColumns () {
+  getFrozenColumns() {
     return this.sheet.getFrozenColumns();
   }
 
-  getValue () {
+  getValue() {
     return this.sheet.activeRange.getValue();
   }
 
-  getValues () {
+  getValues() {
     return this.sheet.activeRange.getValues();
   }
 
-  setValue (data) {
+  setValue(data) {
     this.sheet.activeRange.setValue(data);
 
     return this;
   }
 
-  setValues (data) {
+  setValues(data) {
     this.sheet.activeRange.setValues(data);
 
     return this;
   }
 
-  setNumberFormat (format) {
+  setNumberFormat(format) {
     // https://developers.google.com/sheets/api/guides/formats
     this.sheet.activeRange.setNumberFormat(format);
 
     return this;
   }
 
-  sort (sortSpec) {
+  sort(sortSpec) {
     if (this.sheet.activeRange) {
       this.sheet.activeRange.sort(sortSpec);
     } else {
@@ -140,51 +140,51 @@ class SheetMan {
     return this;
   }
 
-  setHorizontalAlignment (align) {
+  setHorizontalAlignment(align) {
     this.sheet.activeRange.setHorizontalAlignment(align);
 
     return this;
   }
 
-  setVerticalAlignment (align) {
+  setVerticalAlignment(align) {
     this.sheet.activeRange.setVerticalAlignment(align);
 
     return this;
   }
 
-  setColumnWidth (column, width) {
+  setColumnWidth(column, width) {
     this.sheet.setColumnWidth(column, width);
 
     return this;
   }
 
-  setWrap (isWrapEnabled) {
+  setWrap(isWrapEnabled) {
     this.sheet.activeRange.setWrap(isWrapEnabled);
 
     return this;
   }
 
-  setWraps (isWrapEnabled) {
+  setWraps(isWrapEnabled) {
     this.sheet.activeRange.setWraps(isWrapEnabled);
 
     return this;
   }
 
-  setRowHeight (row, height) {
+  setRowHeight(row, height) {
     this.sheet.setRowHeight(row, height);
   }
 
-  setRowHeights (row, lastRow, height) {
+  setRowHeights(row, lastRow, height) {
     this.sheet.setRowHeights(row, lastRow, height);
   }
 
-  setBorder (border) {
+  setBorder(border) {
     this.sheet.activeRange.setBorder(border);
 
     return this;
   }
 
-  setHeader (config) {
+  setHeader(config) {
     const range = this.sheet.getRange('A1:1');
 
     config.freeze && this.sheet.setFrozenRows(1);
@@ -192,243 +192,243 @@ class SheetMan {
     config.color && range.setFontColor(config.color);
   }
 
-  setBackground (color) {
+  setBackground(color) {
     this.sheet.activeRange.setBackground(color);
 
     return this;
   }
 
-  setFontColor (color) {
+  setFontColor(color) {
     this.sheet.activeRange.setFontColor(color);
 
     return this;
   }
 
-  setFontWeight (weight) {
+  setFontWeight(weight) {
     this.sheet.activeRange.setFontWeight(weight);
 
     return this;
   }
 
-  setFontSize (size) {
+  setFontSize(size) {
     this.sheet.activeRange.setFontSize(size);
 
     return this;
   }
 
-  setFontFamily (fontFamily) {
+  setFontFamily(fontFamily) {
     this.sheet.activeRange.setFontFamily(fontFamily);
 
     return this;
   }
 
-  setFontFamilies (fontFamilies) {
+  setFontFamilies(fontFamilies) {
     this.sheet.activeRange.setFontFamilies(fontFamilies);
 
     return this;
   }
 
-  setFontLine (fontLine) {
+  setFontLine(fontLine) {
     this.sheet.activeRange.setFontLine(fontLine);
 
     return this;
   }
 
-  setFontLines (fontLine) {
+  setFontLines(fontLine) {
     this.sheet.activeRange.setFontLines(fontLine);
 
     return this;
   }
 
-  setFormula (formula) {
+  setFormula(formula) {
     this.sheet.activeRange.setFormula(formula);
 
     return this;
   }
 
-  setFormulas (formulas) {
+  setFormulas(formulas) {
     this.sheet.activeRange.setFormulas(formulas);
 
     return this;
   }
 
-  setRichTextValue (value) {
+  setRichTextValue(value) {
     this.sheet.activeRange.setRichTextValue(value);
 
     return this;
   }
 
-  setRichTextValues (values) {
+  setRichTextValues(values) {
     this.sheet.activeRange.setRichTextValues(values);
 
     return this;
   }
 
-  setTextDirection (direction) {
+  setTextDirection(direction) {
     this.sheet.activeRange.setTextDirection(direction);
 
     return this;
   }
 
-  setTextDirections (directions) {
+  setTextDirections(directions) {
     this.sheet.activeRange.setTextDirections(directions);
 
     return this;
   }
 
-  setTextRotation (degrees) {
+  setTextRotation(degrees) {
     this.sheet.activeRange.setTextRotation(degrees);
 
     return this;
   }
 
-  setTextRotations (rotation) {
+  setTextRotations(rotation) {
     this.sheet.activeRange.setTextRotations(rotation);
 
     return this;
   }
 
-  setTextStyle (style) {
+  setTextStyle(style) {
     this.sheet.activeRange.setTextStyle(style);
 
     return this;
   }
 
-  setTextStyles (styles) {
+  setTextStyles(styles) {
     this.sheet.activeRange.setTextStyles(styles);
 
     return this;
   }
 
-  setShowHyperlink (showHyperlink) {
+  setShowHyperlink(showHyperlink) {
     this.sheet.activeRange.setShowHyperlink(showHyperlink);
 
     return this;
   }
 
-  setNote (note) {
+  setNote(note) {
     this.sheet.activeRange.setNote(note);
 
     return this;
   }
 
-  setNotes (notes) {
+  setNotes(notes) {
     this.sheet.activeRange.setNotes(notes);
 
     return this;
   }
 
-  isBlank () {
+  isBlank() {
     return this.sheet.activeRange.isBlank();
   }
 
-  isChecked () {
+  isChecked() {
     return this.sheet.activeRange.isChecked();
   }
 
-  isEndColumnBounded () {
+  isEndColumnBounded() {
     return this.sheet.activeRange.isEndColumnBounded();
   }
 
-  isEndRowBounded () {
+  isEndRowBounded() {
     return this.sheet.activeRange.isEndRowBounded();
   }
 
-  isStartColumnBounded () {
+  isStartColumnBounded() {
     return this.sheet.activeRange.isStartColumnBounded();
   }
 
-  isStartRowBounded () {
+  isStartRowBounded() {
     return this.sheet.activeRange.isStartColumnBounded();
   }
 
-  isPartOfMerge () {
+  isPartOfMerge() {
     return this.sheet.activeRange.isPartOfMerge();
   }
 
-  createDataSourcePivotTable (dataSource) {
+  createDataSourcePivotTable(dataSource) {
     this.sheet.activeRange.createDataSourcePivotTable(dataSource);
 
     return this;
   }
 
-  createDataSourceTable (dataSource) {
+  createDataSourceTable(dataSource) {
     this.sheet.activeRange.createDataSourceTable(dataSource);
 
     return this;
   }
 
-  createDeveloperMetadataFinder () {
+  createDeveloperMetadataFinder() {
     this.sheet.activeRange.createDeveloperMetadataFinder();
 
     return this;
   }
 
-  createFilter () {
+  createFilter() {
     this.sheet.activeRange.createFilter();
 
     return this;
   }
 
-  createPivotTable (sourceData) {
+  createPivotTable(sourceData) {
     this.sheet.activeRange.createPivotTable(sourceData);
 
     return this;
   }
 
-  createTextFinder (findText) {
+  createTextFinder(findText) {
     this.sheet.activeRange.createTextFinder(findText);
 
     return this;
   }
 
-  canEdit () {
+  canEdit() {
     return this.sheet.activeRange.canEdit();
   }
 
-  randomize () {
+  randomize() {
     this.sheet.activeRange = this.sheet.activeRange.randomize();
 
     return this;
   }
 
-  removeCheckboxes () {
+  removeCheckboxes() {
     this.sheet.activeRange = this.sheet.activeRange.removeCheckboxes();
 
     return this;
   }
 
-  removeDuplicates () {
+  removeDuplicates() {
     this.sheet.activeRange = this.sheet.activeRange.removeDuplicates();
 
     return this;
   }
 
-  trimWhitespace () {
+  trimWhitespace() {
     this.sheet.activeRange = this.sheet.activeRange.trimWhitespace();
 
     return this;
   }
 
-  clearFormat () {
+  clearFormat() {
     this.sheet.activeRange.clearFormat();
 
     return this;
   }
 
-  clearFormats () {
+  clearFormats() {
     this.sheet.clearFormats();
 
     return this;
   }
 
-  clearNotes () {
+  clearNotes() {
     this.sheet.clearNotes();
 
     return this;
   }
 
-  copyTo (destination) {
+  copyTo(destination) {
     if (this.sheet.activeRange) {
       this.sheet.activeRange.copyTo(destination);
     } else {
@@ -438,66 +438,66 @@ class SheetMan {
     return this;
   }
 
-  moveTo (target) {
+  moveTo(target) {
     this.sheet.activeRange.moveTo(target);
 
     return this;
   }
 
-  merge () {
+  merge() {
     this.sheet.activeRange.merge();
 
     return this;
   }
 
-  mergeAcross () {
+  mergeAcross() {
     this.sheet.activeRange.mergeAcross();
 
     return this;
   }
 
-  mergeVertically () {
+  mergeVertically() {
     this.sheet.activeRange.mergeVertically();
 
     return this;
   }
 
-  clearContents () {
+  clearContents() {
     this.sheet.clearContents();
 
     return this;
   }
 
-  deleteColumn (index) {
+  deleteColumn(index) {
     this.sheet.deleteColumn(index);
 
     return this;
   }
 
-  deleteRow (index) {
+  deleteRow(index) {
     this.sheet.deleteRow(index + 1);
 
     return this;
   }
 
-  check () {
+  check() {
     this.sheet.activeRange.check();
   }
 
-  uncheck () {
+  uncheck() {
     this.sheet.activeRange.uncheck();
   }
 
   /*
-  * End of Google Apps Script Spreadsheet Wrapper
-  * */
+   * End of Google Apps Script Spreadsheet Wrapper
+   * */
 
   /*
-  * Begin of SheetMan methods
-  * https://developers.google.com/apps-script/reference/spreadsheet
-  * */
+   * Begin of SheetMan methods
+   * https://developers.google.com/apps-script/reference/spreadsheet
+   * */
 
-  createFile (title, nameForFirstSheet) {
+  createFile(title, nameForFirstSheet) {
     this.sheet = SpreadsheetApp.create(title);
 
     if (arguments.length === 2) {
@@ -509,7 +509,7 @@ class SheetMan {
     return this;
   }
 
-  createFileUsingApi (title) {
+  createFileUsingApi(title) {
     const sheet = Sheets.newSpreadsheet();
     sheet.properties = Sheets.newSpreadsheetProperties();
     sheet.properties.title = title;
@@ -521,18 +521,16 @@ class SheetMan {
     return this;
   }
 
-  getFileIdByUrl () {
+  getFileIdByUrl() {
     // https://docs.google.com/spreadsheets/d/{SheetId}/edit#gid={gid}
     return this.sheet.getUrl().split('/')[5];
   }
 
-  getFileId () {
-    return this.sheet.createdSheetId
-      ? this.sheet.createdSheetId
-      : this.getId();
+  getFileId() {
+    return this.sheet.createdSheetId ? this.sheet.createdSheetId : this.getId();
   }
 
-  targetTo (sheetId) {
+  targetTo(sheetId) {
     if (sheetId) {
       this.isExternalSheet = true;
       this.sheet = SpreadsheetApp.openById(sheetId);
@@ -548,13 +546,13 @@ class SheetMan {
     return this;
   }
 
-  targetSelf () {
+  targetSelf() {
     this.targetTo();
 
     return this;
   }
 
-  active (sheetName) {
+  active(sheetName) {
     this.sheet = this.activeSheet.getSheetByName(sheetName);
 
     if (this.sheet) {
@@ -568,30 +566,30 @@ class SheetMan {
     return this;
   }
 
-  isExist (sheetName) {
+  isExist(sheetName) {
     if (this.isExternalSheet) {
       return this.sheet ? this.sheet.getSheetByName(sheetName) : null;
     }
     return this.activeSheet.getSheetByName(sheetName);
   }
 
-  getActiveSheet () {
+  getActiveSheet() {
     return this.activeSheet;
   }
 
-  getActiveRange () {
+  getActiveRange() {
     return this.sheet.activeRange;
   }
 
-  getSheetCount () {
+  getSheetCount() {
     return this.getSheets().length;
   }
 
-  removeRange () {
+  removeRange() {
     this.sheet.activeRange = null;
   }
 
-  create (sheetName) {
+  create(sheetName) {
     try {
       this.sheet = this.activeSheet.insertSheet(sheetName, this.getSheetCount());
 
@@ -604,7 +602,7 @@ class SheetMan {
     return this;
   }
 
-  rename (renameTo) {
+  rename(renameTo) {
     if (!renameTo || renameTo.length < 1) {
       throw `Could not change sheet '${this.sheet.name}' to '${renameTo}'.`;
     }
@@ -614,14 +612,14 @@ class SheetMan {
     return this;
   }
 
-  destroyByName (sheetName) {
+  destroyByName(sheetName) {
     if (sheetName && this.isExist(sheetName)) {
       return this.active(sheetName).destroy();
     }
     return this;
   }
 
-  expand (columnCount, rowCount) {
+  expand(columnCount, rowCount) {
     if (columnCount > 0) {
       this.addColumns(columnCount);
     }
@@ -631,7 +629,7 @@ class SheetMan {
     return this;
   }
 
-  addRows (count) {
+  addRows(count) {
     if (count < 1) {
       throw 'Invalid number of rows to add.';
     }
@@ -645,7 +643,7 @@ class SheetMan {
     return this;
   }
 
-  addColumns (count) {
+  addColumns(count) {
     if (count < 1) {
       throw 'Invalid number of columns to add.';
     }
@@ -659,7 +657,7 @@ class SheetMan {
     return this;
   }
 
-  insertLastColumn (data, forceOneLength = false) {
+  insertLastColumn(data, forceOneLength = false) {
     if (typeof data === 'object') {
       const dataLength = data.length;
       if (dataLength < 1) {
@@ -667,8 +665,7 @@ class SheetMan {
       }
       try {
         this.addColumns(forceOneLength ? 1 : dataLength)
-          .sheet
-          .getRange(1, this.sheet.getLastColumn() + 1, dataLength, 1)
+          .sheet.getRange(1, this.sheet.getLastColumn() + 1, dataLength, 1)
           .setValues(data);
       } catch (e) {
         throw 'The cell data you want to add is more than the number of rows in the actual sheet.';
@@ -684,7 +681,7 @@ class SheetMan {
     return this;
   }
 
-  insertLastRow (data) {
+  insertLastRow(data) {
     if (typeof data === 'object') {
       const dataLength = data.length;
       if (dataLength < 1) {
@@ -701,19 +698,19 @@ class SheetMan {
     return this;
   }
 
-  insertColumnAfter (index) {
+  insertColumnAfter(index) {
     this.sheet.insertColumnAfter(index);
 
     return this;
   }
 
-  insertRowAfter (index) {
+  insertRowAfter(index) {
     this.sheet.insertRowAfter(index);
 
     return this;
   }
 
-  minify (isRow) {
+  minify(isRow) {
     if (!this.sheet) {
       return this;
     }
@@ -747,26 +744,26 @@ class SheetMan {
     return this;
   }
 
-  minifyRows () {
+  minifyRows() {
     this.minify(true);
 
     return this;
   }
 
-  minifyColumns () {
+  minifyColumns() {
     this.minify(false);
 
     return this;
   }
 
-  minifyAll () {
+  minifyAll() {
     this.minifyRows();
     this.minifyColumns();
 
     return this;
   }
 
-  resizeColumns () {
+  resizeColumns() {
     for (let i = 1, columnLength = this.sheet.getMaxColumns(); i <= columnLength; i += 1) {
       this.sheet.autoResizeColumn(i);
       this.sheet.setColumnWidth(i, this.sheet.getColumnWidth(i) + 30);
@@ -775,16 +772,38 @@ class SheetMan {
     return this;
   }
 
-  static getColumnToString (position) {
+  static getColumnToString(position) {
     return [
-      'A', 'B', 'C', 'D', 'E', 'F', 'G',
-      'H', 'I', 'J', 'K', 'L', 'M', 'N',
-      'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-      'V', 'W', 'X', 'Y', 'Z',
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z'
     ][position - 1];
   }
 
   /*
-  * End of SheetMan methods
-  * */
+   * End of SheetMan methods
+   * */
 }

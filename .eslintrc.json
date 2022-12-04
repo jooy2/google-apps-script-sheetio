@@ -1,0 +1,19 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": ["airbnb-base", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-undef": 0,
+    "no-throw-literal": 0,
+    "no-unused-expressions": 1,
+    "no-unused-vars": 1,
+    "space-before-function-paren": ["error", "always"],
+    "class-methods-use-this": 1
+  }
+}

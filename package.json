@@ -5,7 +5,9 @@
   "main": "SheetMan.js",
   "private": true,
   "scripts": {
-    "create": "node claspCreate.js"
+    "create": "node claspCreate.js",
+    "format": "prettier .",
+    "format:fix": "prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,8 @@
     "@google/clasp": "^2.4.2",
     "eslint": "^8.29.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.8.0"
   }
 }

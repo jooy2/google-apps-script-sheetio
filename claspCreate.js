@@ -9,11 +9,18 @@ if (fs.existsSync(CLASP_JSON_PATH)) {
   fs.unlinkSync(CLASP_JSON_PATH);
 }
 
-const claspProcess = spawn('clasp', ['create', '--type', 'sheets', '--title', '"New Sheet with SheetMan"'], { shell: true });
+const claspProcess = spawn(
+  'clasp',
+  ['create', '--type', 'sheets', '--title', '"New Sheet with SheetMan"'],
+  { shell: true }
+);
 
 claspProcess.stdout.on('data', (data) => {
   if (data.toString().indexOf('drive.google.com/open?id=') !== -1) {
-    spreadSheetUrl = data.toString().split('Created new Google Sheet: ')?.[1]?.replace(/\r?\n/g, '');
+    spreadSheetUrl = data
+      .toString()
+      .split('Created new Google Sheet: ')?.[1]
+      ?.replace(/\r?\n/g, '');
   }
   console.log(data.toString());
 });
@@ -45,7 +52,7 @@ claspProcess.on('exit', (code) => {
             openStr = 'xdg-open';
             break;
         }
-        exec((`${openStr} ${spreadSheetUrl}`));
+        exec(`${openStr} ${spreadSheetUrl}`);
       }
     });
   }

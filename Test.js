@@ -3,8 +3,7 @@ const doTest = () => {
   const Sheet = new SheetMan();
 
   const targetSheet = Sheet.active('Example');
-  targetSheet
-    .insertLastRow([['A', 'B', 'C', 'D', 'E']]);
+  targetSheet.insertLastRow([['A', 'B', 'C', 'D', 'E']]);
 
   // Initialize sheet
   // Sheet.destroyByName('Example')
