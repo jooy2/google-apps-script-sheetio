@@ -95,4 +95,5 @@ Not all Spreadsheet methods may be compatible. If there is a method you would li
 See: https://developers.google.com/apps-script/reference/spreadsheet
 
 ## License
-Copyright © 2021 Jooy2 Released under the MIT license
+
+Copyright © 2021-2022 [Jooy2](https://jooy2.com) <[jooy2.contact@gmail.com](mailto:jooy2.contact@gmail.com)> Released under the MIT license.
