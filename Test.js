@@ -1,6 +1,6 @@
 const doTest = () => {
   // TODO Run Demo
-  const Sheet = new SheetMan();
+  const Sheet = new Sheetio();
 
   const targetSheet = Sheet.active('Example');
   targetSheet.insertLastRow([['A', 'B', 'C', 'D', 'E']]);

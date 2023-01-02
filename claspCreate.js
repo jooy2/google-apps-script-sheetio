@@ -11,7 +11,7 @@ if (fs.existsSync(CLASP_JSON_PATH)) {
 
 const claspProcess = spawn(
   'clasp',
-  ['create', '--type', 'sheets', '--title', '"New Sheet with SheetMan"'],
+  ['create', '--type', 'sheets', '--title', '"New Sheet with Sheetio"'],
   { shell: true }
 );
 

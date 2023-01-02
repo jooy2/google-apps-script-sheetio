@@ -1,6 +1,6 @@
 const onOpen = () => {
   SpreadsheetApp.getUi()
-    .createMenu('🧾 SheetMan')
+    .createMenu('🧾 Sheetio Tools')
     .addItem('Run Test', 'doTest')
     .addSeparator()
     .addItem('About', 'onAbout')

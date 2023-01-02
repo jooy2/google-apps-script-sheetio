@@ -1,8 +1,8 @@
-# gas-sheetman
+# Google Apps Script Sheetio
 
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jooy2/gas-sheetman/blob/master/LICENSE) [![Followers](https://img.shields.io/github/followers/jooy2?style=social)](https://github.com/jooy2) ![Stars](https://img.shields.io/github/stars/jooy2/gas-sheetman?style=social) ![Line Count](https://img.shields.io/tokei/lines/github/jooy2/gas-sheetman) ![Repo Size](https://img.shields.io/github/repo-size/jooy2/gas-sheetman)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jooy2/google-apps-script-sheetio/blob/master/LICENSE) [![Followers](https://img.shields.io/github/followers/jooy2?style=social)](https://github.com/jooy2) ![Stars](https://img.shields.io/github/stars/jooy2/google-apps-script-sheetio?style=social) ![Line Count](https://img.shields.io/tokei/lines/github/jooy2/google-apps-script-sheetio) ![Repo Size](https://img.shields.io/github/repo-size/jooy2/google-apps-script-sheetio)
 
-Easy to use **[Google Apps Script](https://script.google.com/)** [Spreadsheet API](https://developers.google.com/apps-script/reference/spreadsheet) (using Method chaining)
+Easy to use **[Google Apps Script](https://script.google.com)** [Spreadsheet API](https://developers.google.com/apps-script/reference/spreadsheet) (using Method chaining)
 
 ## Features
 
@@ -53,15 +53,15 @@ $ clasp push
 
 ### Manual Installation
 
-Put the `SheetMan.js` file in project directory into your new **[Google Apps Script](https://script.google.com/)** project file and use it.
+Put the `Sheetio.js` file in project directory into your new **[Google Apps Script](https://script.google.com/)** project file and use it.
 
 You can also use additional `App.js` and `Test.js` files if necessary.
 
 ## Usage
 
 ```javascript
-// Create a SheetMan instance.
-const Sheet = new SheetMan();
+// Create a Sheetio instance.
+const Sheet = new Sheetio();
 
 // Create a new sheet 'Users'.
 Sheet.create('Users');
@@ -87,7 +87,7 @@ targetSheet
 
 ## Methods
 
-Related descriptions are attached to the entire method of `SheetMan.js`, and the main method of the default API commonly used in Spreadsheet of **Google Apps Script** is overridden.
+Related descriptions are attached to the entire method of `Sheetio.js`, and the main method of the default API commonly used in Spreadsheet of **Google Apps Script** is overridden.
 
 Not all Spreadsheet methods may be compatible. If there is a method you would like to request, please leave an issue or send a PR.
 
@@ -95,4 +95,4 @@ See: https://developers.google.com/apps-script/reference/spreadsheet
 
 ## License
 
-Copyright © 2021-2022 [Jooy2](https://jooy2.com) <[jooy2.contact@gmail.com](mailto:jooy2.contact@gmail.com)> Released under the MIT license.
+Copyright © 2021-2023 [Jooy2](https://jooy2.com) <[jooy2.contact@gmail.com](mailto:jooy2.contact@gmail.com)> Released under the MIT license.

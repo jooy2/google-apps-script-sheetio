@@ -1,8 +1,8 @@
 {
-  "name": "gas-sheetman",
+  "name": "google-apps-script-sheetio",
   "version": "1.0.0",
-  "description": "Easy to use Google Apps Script Spreadsheet API (using Method chaining)",
-  "main": "SheetMan.js",
+  "description": "Easy to use Google Apps Script Spreadsheet API",
+  "main": "Sheetio.js",
   "private": true,
   "scripts": {
     "create": "node claspCreate.js",
@@ -11,20 +11,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jooy2/gas-sheetman.git"
+    "url": "https://github.com/jooy2/google-apps-script-sheetio.git"
   },
   "author": "jooy2 <jooy2.contact@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jooy2/gas-sheetman/issues"
+    "url": "https://github.com/jooy2/google-apps-script-sheetio/issues"
   },
-  "homepage": "https://github.com/jooy2/gas-sheetman#readme",
+  "homepage": "https://github.com/jooy2/google-apps-script-sheetio#readme",
   "devDependencies": {
     "@google/clasp": "^2.4.2",
-    "eslint": "^8.29.0",
+    "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
-    "prettier": "^2.8.0"
+    "prettier": "^2.8.1"
   }
 }

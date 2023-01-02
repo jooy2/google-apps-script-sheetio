@@ -1,7 +1,7 @@
 /*
- * SheetMan (https://github.com/jooy2/gas-sheetman)
+ * Sheetio (@Jooy2, https://github.com/jooy2/google-apps-script-sheetio)
  * */
-class SheetMan {
+class Sheetio {
   constructor() {
     this.activeSheet = SpreadsheetApp.getActiveSpreadsheet();
     this.originSheet = this.activeSheet;
@@ -493,7 +493,7 @@ class SheetMan {
    * */
 
   /*
-   * Begin of SheetMan methods
+   * Begin of Sheetio methods
    * https://developers.google.com/apps-script/reference/spreadsheet
    * */
 
@@ -804,6 +804,6 @@ class SheetMan {
   }
 
   /*
-   * End of SheetMan methods
+   * End of Sheetio methods
    * */
 }
