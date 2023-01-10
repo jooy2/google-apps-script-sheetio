@@ -9,8 +9,12 @@ node_modules/**/.*
 .idea/**
 .idea/**/.*/**
 .idea/**/.*
+.github/**
+.github/**/.*/**
+.github/**/.*
 README.md
 Thumbs.db
 .DS_Store
 LICENSE
 claspCreate.js
+CODE_OF_CONDUCT.md
