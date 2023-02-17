@@ -103,6 +103,10 @@ class Sheetio {
     return this.sheet.getFrozenColumns();
   }
 
+  getColumnWidth(columnPosition) {
+    return this.sheet.getColumnWidth(columnPosition);
+  }
+
   getValue() {
     return this.sheet.activeRange.getValue();
   }
@@ -314,6 +318,12 @@ class Sheetio {
 
   setNotes(notes) {
     this.sheet.activeRange.setNotes(notes);
+
+    return this;
+  }
+
+  autoResizeColumn(columnPosition) {
+    this.sheet.autoResizeColumn(columnPosition);
 
     return this;
   }
