@@ -1,17 +1,19 @@
-# Google Apps Script Sheetio
+# 🔌 Google Apps Script SheetIO
 
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jooy2/google-apps-script-sheetio/blob/master/LICENSE) [![Followers](https://img.shields.io/github/followers/jooy2?style=social)](https://github.com/jooy2) ![Stars](https://img.shields.io/github/stars/jooy2/google-apps-script-sheetio?style=social) ![Line Count](https://img.shields.io/tokei/lines/github/jooy2/google-apps-script-sheetio) ![Repo Size](https://img.shields.io/github/repo-size/jooy2/google-apps-script-sheetio)
+> [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jooy2/google-apps-script-sheetio/blob/master/LICENSE) [![Followers](https://img.shields.io/github/followers/jooy2?style=social)](https://github.com/jooy2) ![Stars](https://img.shields.io/github/stars/jooy2/google-apps-script-sheetio?style=social) ![Line Count](https://img.shields.io/tokei/lines/github/jooy2/google-apps-script-sheetio) ![Commit Count](https://img.shields.io/github/commit-activity/y/jooy2/google-apps-script-sheetio) ![Repo Size](https://img.shields.io/github/repo-size/jooy2/google-apps-script-sheetio)
 
 Easy to use **[Google Apps Script](https://script.google.com)** [Spreadsheet API](https://developers.google.com/apps-script/reference/spreadsheet) (using Method chaining)
 
 ## Features
 
-- Easy to use, data insertion and styling
-- Handling of external Google Sheets files
+- ⚡️ Installing scripts into your project Super-Fast!
+- ⚡️ Easy to use, data insertion and styling
+- ⚡️ Handling of external Google Sheets files
+- ⚡️ Support for a variety of utility methods to simplify sheet operations
 
 ## Installation
 
-### Installation using `clasp`
+### Step 1. Install `clasp`
 
 In order to properly use all configuration of `clasp`, you need to change the Enabled setting of Google Apps Script API to 'Enable' after logging in with your Google account on the next page: https://script.google.com/home/usersettings
 
@@ -29,15 +31,19 @@ You may need a `clasp` login before proceeding. Skip if you have already done th
 $ clasp login
 ```
 
-Then run one of the following commands:
+### Step 2-A. Create Google SpreadSheet script in your workspace
+
+You can create Google Sheets and script projects in Google Drive. We recommend running your own scripts with everything integrated.
+
+#### [Method 1] Create automatically (recommended)
+
+This npm script helps you quickly and easily push scripts to your new spreadsheet file using `clasp`.
 
 ```shell
 $ npm run create
 ```
 
-This npm script helps you quickly and easily push scripts to your new spreadsheet file using `clasp`.
-
-Or you can simply use `clasp create`.
+#### [Method 2] Create manually
 
 ```shell
 $ clasp create
@@ -51,17 +57,19 @@ Make sure a `.clasp.json` file is created in your project root. After that, you 
 $ clasp push
 ```
 
-### Manual Installation
+### Step 2-B. Manual Installation
 
-Put the `Sheetio.js` file in project directory into your new **[Google Apps Script](https://script.google.com/)** project file and use it.
+If you already have a Google Script project created, or if you want to add your own script files, follow the steps below.
+
+Put the `SheetIO.js` file in project directory into your new **[Google Apps Script](https://script.google.com/)** project file and use it.
 
 You can also use additional `App.js` and `Test.js` files if necessary.
 
 ## Usage
 
 ```javascript
-// Create a Sheetio instance.
-const Sheet = new Sheetio();
+// Create a SheetIO instance.
+const Sheet = new SheetIO();
 
 // Create a new sheet 'Users'.
 Sheet.create('Users');
@@ -85,9 +93,9 @@ targetSheet
   ]);
 ```
 
-## Methods
+## Using API / Methods
 
-Related descriptions are attached to the entire method of `Sheetio.js`, and the main method of the default API commonly used in Spreadsheet of **Google Apps Script** is overridden.
+Related descriptions are attached to the entire method of `SheetIO.js`, and the main method of the default API commonly used in Spreadsheet of **Google Apps Script** is overridden.
 
 Not all Spreadsheet methods may be compatible. If there is a method you would like to request, please leave an issue or send a PR.
 
