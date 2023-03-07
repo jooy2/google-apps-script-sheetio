@@ -1,17 +1,21 @@
 /*
- * Sheetio (@Jooy2, https://github.com/jooy2/google-apps-script-sheetio)
+ * SheetIO (@Jooy2, https://github.com/jooy2/google-apps-script-sheetio)
  * */
-class Sheetio {
+class SheetIO {
   constructor() {
     this.activeSheet = SpreadsheetApp.getActiveSpreadsheet();
     this.originSheet = this.activeSheet;
     this.sheet = null;
   }
 
-  /*
-   * Begin of Google Apps Script Spreadsheet Wrapper
+  /* =================================================================
+   * [BEGIN] Google Apps Script Spreadsheet Wrapper
    * https://developers.google.com/apps-script/reference/spreadsheet
-   * */
+   * ================================================================= */
+
+  /* -----------------------------------------------------------------
+   * [BEGIN] API::Sheet
+   * ----------------------------------------------------------------- */
 
   getSheetId() {
     return this.sheet.getSheetId();
@@ -57,36 +61,6 @@ class Sheetio {
     return this.activeSheet.getSheets();
   }
 
-  getRange(startRow, startColumn, rows, columns) {
-    if (arguments.length === 1) {
-      this.sheet.activeRange = this.sheet.getRange(startRow);
-    } else if (arguments.length === 2) {
-      this.sheet.activeRange = this.sheet.getRange(startRow, startColumn);
-    } else {
-      this.sheet.activeRange = this.sheet.getRange(startRow, startColumn, rows, columns);
-    }
-
-    return this;
-  }
-
-  getDataRange() {
-    this.sheet.activeRange = this.sheet.getDataRange();
-
-    return this;
-  }
-
-  getLastRow() {
-    const lastRow = this.sheet.getLastRow();
-
-    return lastRow === 0 ? 1 : lastRow;
-  }
-
-  getLastColumn() {
-    const lastColumn = this.sheet.getLastColumn();
-
-    return lastColumn === 0 ? 1 : lastColumn;
-  }
-
   getMaxRows() {
     return this.sheet.getMaxRows();
   }
@@ -107,12 +81,368 @@ class Sheetio {
     return this.sheet.getColumnWidth(columnPosition);
   }
 
+  getRange(startRow, startColumn, rows, columns) {
+    if (arguments.length === 1) {
+      this.sheet.activeRange = this.sheet.getRange(startRow);
+    } else if (arguments.length === 2) {
+      this.sheet.activeRange = this.sheet.getRange(startRow, startColumn);
+    } else {
+      this.sheet.activeRange = this.sheet.getRange(startRow, startColumn, rows, columns);
+    }
+
+    return this;
+  }
+
+  getDataRange() {
+    this.sheet.activeRange = this.sheet.getDataRange();
+
+    return this;
+  }
+
+  setColumnWidth(column, width) {
+    this.sheet.setColumnWidth(column, width);
+
+    return this;
+  }
+
+  setRowHeight(row, height) {
+    this.sheet.setRowHeight(row, height);
+  }
+
+  setRowHeights(row, lastRow, height) {
+    this.sheet.setRowHeights(row, lastRow, height);
+  }
+
+  setHeader(config) {
+    const range = this.sheet.getRange('A1:1');
+
+    config.freeze && this.sheet.setFrozenRows(1);
+    config.background && range.setBackground(config.background);
+    config.color && range.setFontColor(config.color);
+  }
+
+  autoResizeColumn(columnPosition) {
+    this.sheet.autoResizeColumn(columnPosition);
+
+    return this;
+  }
+
+  clearFormats() {
+    this.sheet.clearFormats();
+
+    return this;
+  }
+
+  clearNotes() {
+    this.sheet.clearNotes();
+
+    return this;
+  }
+
+  clearContents() {
+    this.sheet.clearContents();
+
+    return this;
+  }
+
+  deleteColumn(index) {
+    this.sheet.deleteColumn(index);
+
+    return this;
+  }
+
+  deleteRow(index) {
+    this.sheet.deleteRow(index + 1);
+
+    return this;
+  }
+
+  /* -----------------------------------------------------------------
+   * [END] API::Sheet
+   * ----------------------------------------------------------------- */
+
+  /* -----------------------------------------------------------------
+   * [BEGIN] API::Sheet::Range
+   * ----------------------------------------------------------------- */
+
+  getA1Notation() {
+    return this.sheet.activeRange.getA1Notation();
+  }
+
+  getBackground() {
+    return this.sheet.activeRange.getBackground();
+  }
+
+  getBackgroundObject() {
+    return this.sheet.activeRange.getBackgroundObject();
+  }
+
+  getBackgroundObjects() {
+    return this.sheet.activeRange.getBackgroundObjects();
+  }
+
+  getBackgrounds() {
+    return this.sheet.activeRange.getBackgrounds();
+  }
+
+  getBandings() {
+    return this.sheet.activeRange.getBandings();
+  }
+
+  getCell(row, column) {
+    return this.sheet.activeRange.getCell(row, column);
+  }
+
+  getColumn() {
+    return this.sheet.activeRange.getColumn();
+  }
+
+  getDataRegion(dimension) {
+    if (dimension) {
+      return this.sheet.activeRange.getDataRegion(dimension);
+    }
+
+    return this.sheet.activeRange.getDataRegion();
+  }
+
+  getDataSourceFormula() {
+    return this.sheet.activeRange.getDataSourceFormula();
+  }
+
+  getDataSourceFormulas() {
+    return this.sheet.activeRange.getDataSourceFormulas();
+  }
+
+  getDataSourcePivotTables() {
+    return this.sheet.activeRange.getDataSourcePivotTables();
+  }
+
+  getDataSourceTables() {
+    return this.sheet.activeRange.getDataSourceTables();
+  }
+
+  getDataSourceUrl() {
+    return this.sheet.activeRange.getDataSourceUrl();
+  }
+
+  getDataTable(firstRowIsHeader) {
+    if (firstRowIsHeader) {
+      return this.sheet.activeRange.getDataTable(firstRowIsHeader);
+    }
+
+    return this.sheet.activeRange.getDataTable();
+  }
+
+  getDataValidation() {
+    return this.sheet.activeRange.getDataValidation();
+  }
+
+  getDataValidations() {
+    return this.sheet.activeRange.getDataValidations();
+  }
+
+  getDeveloperMetadata() {
+    return this.sheet.activeRange.getDeveloperMetadata();
+  }
+
+  getDisplayValue() {
+    return this.sheet.activeRange.getDisplayValue();
+  }
+
+  getDisplayValues() {
+    return this.sheet.activeRange.getDisplayValues();
+  }
+
+  getFilter() {
+    return this.sheet.activeRange.getFilter();
+  }
+
+  getFontColorObject() {
+    return this.sheet.activeRange.getFontColorObject();
+  }
+
+  getFontColorObjects() {
+    return this.sheet.activeRange.getFontColorObjects();
+  }
+
+  getFontFamilies() {
+    return this.sheet.activeRange.getFontFamilies();
+  }
+
+  getFontFamily() {
+    return this.sheet.activeRange.getFontFamily();
+  }
+
+  getFontLine() {
+    return this.sheet.activeRange.getFontLine();
+  }
+
+  getFontLines() {
+    return this.sheet.activeRange.getFontLines();
+  }
+
+  getFontSize() {
+    return this.sheet.activeRange.getFontSize();
+  }
+
+  getFontSizes() {
+    return this.sheet.activeRange.getFontSizes();
+  }
+
+  getFontStyle() {
+    return this.sheet.activeRange.getFontStyle();
+  }
+
+  getFontStyles() {
+    return this.sheet.activeRange.getFontStyles();
+  }
+
+  getFontWeight() {
+    return this.sheet.activeRange.getFontWeight();
+  }
+
+  getFontWeights() {
+    return this.sheet.activeRange.getFontWeights();
+  }
+
+  getFormula() {
+    return this.sheet.activeRange.getFormula();
+  }
+
+  getFormulaR1C1() {
+    return this.sheet.activeRange.getFormulaR1C1();
+  }
+
+  getFormulas() {
+    return this.sheet.activeRange.getFormulas();
+  }
+
+  getFormulasR1C1() {
+    return this.sheet.activeRange.getFormulasR1C1();
+  }
+
+  getGridId() {
+    return this.sheet.activeRange.getGridId();
+  }
+
+  getWidth() {
+    return this.sheet.activeRange.getWidth();
+  }
+
+  getHeight() {
+    return this.sheet.activeRange.getHeight();
+  }
+
+  getHorizontalAlignment() {
+    return this.sheet.activeRange.getHorizontalAlignment();
+  }
+
+  getHorizontalAlignments() {
+    return this.sheet.activeRange.getHorizontalAlignments();
+  }
+
+  getVerticalAlignment() {
+    return this.sheet.activeRange.getVerticalAlignment();
+  }
+
+  getVerticalAlignments() {
+    return this.sheet.activeRange.getVerticalAlignments();
+  }
+
+  getLastRow() {
+    const lastRow = this.sheet.getLastRow();
+
+    return lastRow === 0 ? 1 : lastRow;
+  }
+
+  getLastColumn() {
+    const lastColumn = this.sheet.getLastColumn();
+
+    return lastColumn === 0 ? 1 : lastColumn;
+  }
+
+  getMergedRanges() {
+    return this.sheet.activeRange.getMergedRanges();
+  }
+
+  getNextDataCell(direction) {
+    return this.sheet.activeRange.getNextDataCell(direction);
+  }
+
+  getNote() {
+    return this.sheet.activeRange.getNote();
+  }
+
+  getNotes() {
+    return this.sheet.activeRange.getNotes();
+  }
+
+  getNumColumns() {
+    return this.sheet.activeRange.getNumColumns();
+  }
+
+  getNumRows() {
+    return this.sheet.activeRange.getNumRows();
+  }
+
+  getNumberFormat() {
+    return this.sheet.activeRange.getNumberFormat();
+  }
+
+  getNumberFormats() {
+    return this.sheet.activeRange.getNumberFormats();
+  }
+
+  getRichTextValue() {
+    return this.sheet.activeRange.getRichTextValue();
+  }
+
+  getRichTextValues() {
+    return this.sheet.activeRange.getRichTextValues();
+  }
+
+  getRow() {
+    return this.sheet.activeRange.getRow();
+  }
+
+  getRowIndex() {
+    return this.sheet.activeRange.getRowIndex();
+  }
+
+  getSheet() {
+    return this.sheet.activeRange.getSheet();
+  }
+
+  getTextStyle() {
+    return this.sheet.activeRange.getTextStyle();
+  }
+
+  getTextStyles() {
+    return this.sheet.activeRange.getTextStyles();
+  }
+
   getValue() {
     return this.sheet.activeRange.getValue();
   }
 
   getValues() {
     return this.sheet.activeRange.getValues();
+  }
+
+  getWrap() {
+    return this.sheet.activeRange.getWrap();
+  }
+
+  getWrapStrategies() {
+    return this.sheet.activeRange.getWrapStrategies();
+  }
+
+  getWrapStrategy() {
+    return this.sheet.activeRange.getWrapStrategy();
+  }
+
+  getWraps() {
+    return this.sheet.activeRange.getWraps();
   }
 
   setValue(data) {
@@ -127,9 +457,15 @@ class Sheetio {
     return this;
   }
 
-  setNumberFormat(format) {
+  setNumberFormat(numberFormat) {
     // https://developers.google.com/sheets/api/guides/formats
-    this.sheet.activeRange.setNumberFormat(format);
+    this.sheet.activeRange.setNumberFormat(numberFormat);
+
+    return this;
+  }
+
+  setNumberFormats(numberFormats) {
+    this.sheet.activeRange.setNumberFormats(numberFormats);
 
     return this;
   }
@@ -144,20 +480,26 @@ class Sheetio {
     return this;
   }
 
-  setHorizontalAlignment(align) {
-    this.sheet.activeRange.setHorizontalAlignment(align);
+  setHorizontalAlignment(alignment) {
+    this.sheet.activeRange.setHorizontalAlignment(alignment);
 
     return this;
   }
 
-  setVerticalAlignment(align) {
-    this.sheet.activeRange.setVerticalAlignment(align);
+  setVerticalAlignment(alignment) {
+    this.sheet.activeRange.setVerticalAlignment(alignment);
 
     return this;
   }
 
-  setColumnWidth(column, width) {
-    this.sheet.setColumnWidth(column, width);
+  setHorizontalAlignments(alignments) {
+    this.sheet.activeRange.setHorizontalAlignments(alignments);
+
+    return this;
+  }
+
+  setVerticalAlignments(alignments) {
+    this.sheet.activeRange.setVerticalAlignments(alignments);
 
     return this;
   }
@@ -174,26 +516,10 @@ class Sheetio {
     return this;
   }
 
-  setRowHeight(row, height) {
-    this.sheet.setRowHeight(row, height);
-  }
-
-  setRowHeights(row, lastRow, height) {
-    this.sheet.setRowHeights(row, lastRow, height);
-  }
-
   setBorder(border) {
     this.sheet.activeRange.setBorder(border);
 
     return this;
-  }
-
-  setHeader(config) {
-    const range = this.sheet.getRange('A1:1');
-
-    config.freeze && this.sheet.setFrozenRows(1);
-    config.background && range.setBackground(config.background);
-    config.color && range.setFontColor(config.color);
   }
 
   setBackground(color) {
@@ -208,8 +534,20 @@ class Sheetio {
     return this;
   }
 
-  setFontWeight(weight) {
-    this.sheet.activeRange.setFontWeight(weight);
+  setFontColorObject(color) {
+    this.sheet.activeRange.setFontColorObject(color);
+
+    return this;
+  }
+
+  setFontColorObjects(colors) {
+    this.sheet.activeRange.setFontColorObjects(colors);
+
+    return this;
+  }
+
+  setFontColors(colors) {
+    this.sheet.activeRange.setFontColors(colors);
 
     return this;
   }
@@ -244,6 +582,30 @@ class Sheetio {
     return this;
   }
 
+  setFontStyle(fontStyle) {
+    this.sheet.activeRange.setFontStyle(fontStyle);
+
+    return this;
+  }
+
+  setFontStyles(fontStyles) {
+    this.sheet.activeRange.setFontStyles(fontStyles);
+
+    return this;
+  }
+
+  setFontWeight(fontWeight) {
+    this.sheet.activeRange.setFontWeight(fontWeight);
+
+    return this;
+  }
+
+  setFontWeights(fontWeights) {
+    this.sheet.activeRange.setFontWeights(fontWeights);
+
+    return this;
+  }
+
   setFormula(formula) {
     this.sheet.activeRange.setFormula(formula);
 
@@ -252,6 +614,18 @@ class Sheetio {
 
   setFormulas(formulas) {
     this.sheet.activeRange.setFormulas(formulas);
+
+    return this;
+  }
+
+  setFormulaR1C1(formula) {
+    this.sheet.activeRange.setFormulaR1C1(formula);
+
+    return this;
+  }
+
+  setFormulasR1C1(formulas) {
+    this.sheet.activeRange.setFormulasR1C1(formulas);
 
     return this;
   }
@@ -322,8 +696,8 @@ class Sheetio {
     return this;
   }
 
-  autoResizeColumn(columnPosition) {
-    this.sheet.autoResizeColumn(columnPosition);
+  setVerticalText(isVertical) {
+    this.sheet.activeRange.setVerticalText(isVertical);
 
     return this;
   }
@@ -426,18 +800,6 @@ class Sheetio {
     return this;
   }
 
-  clearFormats() {
-    this.sheet.clearFormats();
-
-    return this;
-  }
-
-  clearNotes() {
-    this.sheet.clearNotes();
-
-    return this;
-  }
-
   copyTo(destination) {
     if (this.sheet.activeRange) {
       this.sheet.activeRange.copyTo(destination);
@@ -472,24 +834,6 @@ class Sheetio {
     return this;
   }
 
-  clearContents() {
-    this.sheet.clearContents();
-
-    return this;
-  }
-
-  deleteColumn(index) {
-    this.sheet.deleteColumn(index);
-
-    return this;
-  }
-
-  deleteRow(index) {
-    this.sheet.deleteRow(index + 1);
-
-    return this;
-  }
-
   check() {
     this.sheet.activeRange.check();
   }
@@ -498,14 +842,14 @@ class Sheetio {
     this.sheet.activeRange.uncheck();
   }
 
-  /*
-   * End of Google Apps Script Spreadsheet Wrapper
-   * */
+  /* =================================================================
+   * [END] Google Apps Script Spreadsheet Wrapper
+   * ================================================================= */
 
-  /*
-   * Begin of Sheetio methods
-   * https://developers.google.com/apps-script/reference/spreadsheet
-   * */
+  /* =================================================================
+   * [BEGIN] Standalone utility methods used in SheetIO
+   * See: https://github.com/jooy2/google-apps-script-sheetio/blob/master/README.md
+   * ================================================================= */
 
   createFile(title, nameForFirstSheet) {
     this.sheet = SpreadsheetApp.create(title);
@@ -813,7 +1157,7 @@ class Sheetio {
     ][position - 1];
   }
 
-  /*
-   * End of Sheetio methods
-   * */
+  /* =================================================================
+   * [END] Standalone utility methods used in SheetIO
+   * ================================================================= */
 }
