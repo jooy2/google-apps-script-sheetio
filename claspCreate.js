@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
-const fs = require('fs');
+const { existsSync, unlinkSync } = require('fs');
 const { exec, spawn } = require('child_process');
 
 const CLASP_JSON_PATH = '.clasp.json';
 let spreadSheetUrl;
 
-if (fs.existsSync(CLASP_JSON_PATH)) {
-  fs.unlinkSync(CLASP_JSON_PATH);
+if (existsSync(CLASP_JSON_PATH)) {
+  unlinkSync(CLASP_JSON_PATH);
 }
 
 const claspProcess = spawn(
