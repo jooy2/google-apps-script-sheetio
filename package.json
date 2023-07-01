@@ -21,7 +21,7 @@
   "homepage": "https://github.com/jooy2/google-apps-script-sheetio#readme",
   "devDependencies": {
     "@google/clasp": "^2.4.2",
-    "eslint": "^8.37.0",
+    "eslint": "^8.44.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
