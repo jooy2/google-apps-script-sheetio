@@ -101,6 +101,10 @@ Not all Spreadsheet methods may be compatible. If there is a method you would li
 
 See: https://developers.google.com/apps-script/reference/spreadsheet
 
+## Contributing
+
+Anyone can contribute to the project by reporting new issues or submitting a pull request. For more information, please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## License
 
-Copyright © 2021-2024 [Jooy2](https://jooy2.com) <[jooy2.contact@gmail.com](mailto:jooy2.contact@gmail.com)> Released under the MIT license.
+Please see the [LICENSE](LICENSE) file for more information about project owners, usage rights, and more.
