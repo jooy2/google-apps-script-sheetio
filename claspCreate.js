@@ -11,7 +11,7 @@ if (existsSync(CLASP_JSON_PATH)) {
 
 const claspProcess = spawn(
   'clasp',
-  ['create', '--type', 'sheets', '--title', '"New Sheet with Sheetio"'],
+  ['create', '--type', 'sheets', '--title', '"New Sheet with Spreadit"'],
   { shell: true }
 );
 

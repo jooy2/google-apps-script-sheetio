@@ -1,8 +1,8 @@
 {
-  "name": "google-apps-script-sheetio",
+  "name": "spreadit",
   "version": "1.0.0",
   "description": "Easy to use Google Apps Script Spreadsheet API",
-  "main": "Sheetio.js",
+  "main": "Spreadit.js",
   "private": true,
   "scripts": {
     "create": "node claspCreate.js",
@@ -11,20 +11,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jooy2/google-apps-script-sheetio.git"
+    "url": "https://github.com/jooy2/spreadit.git"
   },
   "author": "jooy2 <jooy2.contact@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jooy2/google-apps-script-sheetio/issues"
+    "url": "https://github.com/jooy2/spreadit/issues"
   },
-  "homepage": "https://github.com/jooy2/google-apps-script-sheetio#readme",
+  "homepage": "https://github.com/jooy2/spreadit#readme",
   "devDependencies": {
     "@google/clasp": "^2.4.2",
     "eslint": "^8.56.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
-    "prettier": "^3.2.5"
+    "prettier": "^3.4.2"
   }
 }

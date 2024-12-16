@@ -1,6 +1,6 @@
-# 🔌 Google Apps Script SheetIO
+# 🔌 Google Apps Script Spreadit
 
-> [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jooy2/google-apps-script-sheetio/blob/master/LICENSE) [![Followers](https://img.shields.io/github/followers/jooy2?style=social)](https://github.com/jooy2) ![Stars](https://img.shields.io/github/stars/jooy2/google-apps-script-sheetio?style=social) ![Line Count](https://img.shields.io/tokei/lines/github/jooy2/google-apps-script-sheetio) ![Commit Count](https://img.shields.io/github/commit-activity/y/jooy2/google-apps-script-sheetio) ![Repo Size](https://img.shields.io/github/repo-size/jooy2/google-apps-script-sheetio)
+> [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jooy2/spreadit/blob/main/LICENSE) [![Followers](https://img.shields.io/github/followers/jooy2?style=social)](https://github.com/jooy2) ![Stars](https://img.shields.io/github/stars/jooy2/google-apps-script-sheetio?style=social) ![Line Count](https://img.shields.io/tokei/lines/github/jooy2/google-apps-script-sheetio) ![Commit Count](https://img.shields.io/github/commit-activity/y/jooy2/google-apps-script-sheetio) ![Repo Size](https://img.shields.io/github/repo-size/jooy2/google-apps-script-sheetio)
 
 Easy to use **[Google Apps Script](https://script.google.com)** [Spreadsheet API](https://developers.google.com/apps-script/reference/spreadsheet) (using Method chaining)
 
@@ -61,15 +61,15 @@ $ clasp push
 
 If you already have a Google Script project created, or if you want to add your own script files, follow the steps below.
 
-Put the `SheetIO.js` file in project directory into your new **[Google Apps Script](https://script.google.com/)** project file and use it.
+Put the `Spreadit.js` file in project directory into your new **[Google Apps Script](https://script.google.com)** project file and use it.
 
 You can also use additional `App.js` and `Test.js` files if necessary.
 
 ## Usage
 
 ```javascript
-// Create a SheetIO instance.
-const Sheet = new SheetIO();
+// Create a Spreadit instance.
+const Sheet = new Spreadit();
 
 // Create a new sheet 'Users'.
 Sheet.create('Users');
@@ -95,7 +95,7 @@ targetSheet
 
 ## Using API / Methods
 
-Related descriptions are attached to the entire method of `SheetIO.js`, and the main method of the default API commonly used in Spreadsheet of **Google Apps Script** is overridden.
+Related descriptions are attached to the entire method of `Spreadit.js`, and the main method of the default API commonly used in Spreadsheet of **Google Apps Script** is overridden.
 
 Not all Spreadsheet methods may be compatible. If there is a method you would like to request, please leave an issue or send a PR.
 

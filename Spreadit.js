@@ -1,7 +1,7 @@
 /*
- * SheetIO (@Jooy2, https://github.com/jooy2/google-apps-script-sheetio)
+ * Spreadit (@Jooy2, https://github.com/jooy2/spreadit)
  * */
-class SheetIO {
+class Spreadit {
   constructor() {
     this.activeSheet = SpreadsheetApp.getActiveSpreadsheet();
     this.originSheet = this.activeSheet;
@@ -847,8 +847,8 @@ class SheetIO {
    * ================================================================= */
 
   /* =================================================================
-   * [BEGIN] Standalone utility methods used in SheetIO
-   * See: https://github.com/jooy2/google-apps-script-sheetio/blob/master/README.md
+   * [BEGIN] Standalone utility methods used in Spreadit
+   * See: https://github.com/jooy2/spreadit/blob/main/README.md
    * ================================================================= */
 
   createFile(title, nameForFirstSheet) {
@@ -1158,6 +1158,6 @@ class SheetIO {
   }
 
   /* =================================================================
-   * [END] Standalone utility methods used in SheetIO
+   * [END] Standalone utility methods used in Spreadit
    * ================================================================= */
 }
